@@ -8,6 +8,7 @@ created_at: "2026-08-21"
 # august 21: got started and ...
 started with making the README as all half-baked projects do and added the CERN-OHL to it :>
 
+<img alt="the repository github page showing its README.md and other files" src="https://github.com/user-attachments/assets/bd369d16-d723-476e-86f1-6ee637da7368" />
 
 decided to research what i wanted to put in this (i.e. the features) and came up with a few things:
  - a push-to-talk mic for making voice memos
@@ -31,3 +32,5 @@ i'll figure the rest of the features out as i go along lol
 i'm planning to also design (and hopefully 3D print) a couple of different enclosures to keep it attached on bag straps or on other stuff! still trying to think about how to solve the issue of this stuff not being used in *questionable* ways... 
 
 for some of the features above dealing with sensitive data i could add data encryption but thats a story for another time
+
+**total time spent: 2.5 hours*
