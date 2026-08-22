@@ -33,4 +33,26 @@ i'm planning to also design (and hopefully 3D print) a couple of different enclo
 
 for some of the features above dealing with sensitive data i could add data encryption but thats a story for another time
 
-**total time spent: 2.5 hours*
+**total time spent: 2.5 hours**
+
+# august 22: started work on the microcontroller!
+started off looking up what microcontroller i should use,
+some stuff that contributed to my final decision were
+ - how power intensive it is
+ - if it has enough gpios for all the features
+ - cryptography support!!! (wouldn't want *questionable* things to happen to the recordings so i should be encrypting user data)
+
+so i eventually decided on the STM32U3C5RI cos it checks off all the criteria listed above! i started reading stuff on it to understand what i was working with (datasheets, guides, random oddly helpful reddit posts, etc.)
+
+unrelated, but i just realized i paused lookout for about 30 mins without noticing :/
+
+i'm thinking of adding extra flash on top of the MCU's inbuilt stuff
+i'll be referring to this tutorial [here](https://roboticworx.io/blogs/projects/build-custom-stm32s-from-scratch-tutorial) for some of the stuff (no i'm not going to copy it 1 to 1 relaaaaaaxxxxxxx)
+
+i'm probably not going to add an onboard STlink debugger (yet)
+
+so far i've learned about what goes into a devboard so i'll have to connect 
+ - a voltage regulator (the MCU runs on 3.3V)
+ - external OCTOSPI
+
+**total time spent: 4.5 hours**
