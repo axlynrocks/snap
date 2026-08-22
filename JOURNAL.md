@@ -46,6 +46,8 @@ so i eventually decided on the STM32U3C5RI cos it checks off all the criteria li
 
 unrelated, but i just realized i paused lookout for about 30 mins without noticing :/
 
+<img width="456" height="377" alt="image" src="https://github.com/user-attachments/assets/712fbdf9-aea2-405a-bebb-3ac1648ba517" />
+
 i'm thinking of adding extra flash on top of the MCU's inbuilt stuff
 i'll be referring to this tutorial [here](https://roboticworx.io/blogs/projects/build-custom-stm32s-from-scratch-tutorial) for some of the stuff (no i'm not going to copy it 1 to 1 relaaaaaaxxxxxxx)
 
