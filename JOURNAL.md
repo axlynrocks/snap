@@ -8,7 +8,7 @@ created_at: "2026-08-21"
 # august 21: got started and ...
 started with making the README as all half-baked projects do and added the CERN-OHL to it :>
 
-<img alt="the repository github page showing its README.md and other files" src="https://github.com/user-attachments/assets/bd369d16-d723-476e-86f1-6ee637da7368" />
+![the repository github page showing its README.md and other files](journal_images/snap_repo_homepage.png)
 
 decided to research what i wanted to put in this (i.e. the features) and came up with a few things:
  - a push-to-talk mic for making voice memos
@@ -46,7 +46,7 @@ so i eventually decided on the STM32U3C5RI cos it checks off all the criteria li
 
 unrelated, but i just realized i paused lookout for about 30 mins without noticing :/
 
-<img width="456" height="377" alt="image" src="https://github.com/user-attachments/assets/712fbdf9-aea2-405a-bebb-3ac1648ba517" />
+![a picture showing a notification saying, "Lookout - recording paused" dated to 6:44pm, and a digital clock showing the current time at 7:20pm](journal_images/forgot_to_record.png)
 
 i'm thinking of adding extra flash on top of the MCU's inbuilt stuff
 i'll be referring to this tutorial [here](https://roboticworx.io/blogs/projects/build-custom-stm32s-from-scratch-tutorial) for some of the stuff (no i'm not going to copy it 1 to 1 relaaaaaaxxxxxxx)
