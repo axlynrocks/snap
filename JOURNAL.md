@@ -58,3 +58,47 @@ so far i've learned about what goes into a devboard so i'll have to connect
  - external OCTOSPI
 
 **total time spent: 4.5 hours**
+
+# august 23: schematics pt.1
+note that this is chronologically immediately after the previous journal entry i just wanted to break them in two it is currently 12am something as of writing this
+
+anyways b a c k to the journal entry!
+
+ok here goes nothing i'm going to actually start making the wait can i just call this a glorified devboard bit (MCU, power regulator, flash, crystal - yknow the basic bits)
+
+unrelated note: fell asleep at 1am here, woke up at 6 something
+
+according to its [datasheet](https://www.st.com/resource/en/datasheet/stm32u3c5ci.pdf) (chapter 7, ordering info), the STM32U3C5RIT6 has 64 pins, comes in a LQFP (low-profile quad flat package), can stand temperatures of -40C to 85C, and does NOT have an SMPS (saving me the GPIOs and time cos this isn't an application where i'd need to optimize every mW)
+
+also going to refer to [this](https://www.st.com/resource/en/application_note/an6011-getting-started-with-stm32u3-mcu-hardware-development-stmicroelectronics.pdf), specifically chapter 8, reference design, figure 13
+
+got slightly carried away and switched the journal images from being hosted on github's user attachments to a local directory (`journal_images` in case you're looking for it)
+
+i'm going to start off with this schematic (chapter 5, electrical characteristics, figure 23), showing what capacitors go where for its power supply specifically for the models without an SMPS
+
+![power supply scheme for the STM32U3C5xx series, refer to datasheet link above](journal_images/STM32U3C5xx_power_supply_scheme.png)
+
+**it** happened again. 15 long minutes of not recording. TwT
+
+also, note to self, make sure to check the contents of your commit before pushing to the repo blindly to avoid a 20min long headache fixing broken symbol and footprint paths
+
+anyways following this, i did this (btw VDDIO and VREF in figure 23 don't apply for the STM32U3C5RIT6 cos it doesn't have those pins) to complete the power decoupling caps!
+
+![schematic for power caps on MCU symbol B](journal_images/power_caps_B.png) 
+![schematic for power caps on MCU symbol A](journal_images/power_caps_A.png)
+
+next i looked at adding an oscillator to it, following (chapter 5, electrical characteristics, figure 23), 
+
+![typical application with a 8 MHz crystal, refer to datasheet link above](journal_images/typical_application_with_a_8_MHz_crystal.png)
+
+[the application note](https://www.st.com/resource/en/application_note/an2867-guidelines-for-oscillator-design-on-stm8afals-and-stm32-mcusmpus-stmicroelectronics.pdf)
+
+i used an ECS-80-18-23B-JTN-TR 8MHz crystal for the oscillator and a SC32S-7PF20PPM 32.768kHz crystal for the LSE following the tutorial cos i didnt see a reason to change it
+
+![schematic for oscillator and LSE](journal_images/oscillator_LSE.png)
+
+now this part's a little bit tricky: i have to decide what pins in particular i'm going to need to breakout, so that means returning to the feature list!!!
+
+i'm going to stop here for now lol while i figure out the features, protocols, pins and stuff
+
+**total time spent: 6.25 hours**
