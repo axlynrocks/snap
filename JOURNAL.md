@@ -102,3 +102,29 @@ now this part's a little bit tricky: i have to decide what pins in particular i'
 i'm going to stop here for now lol while i figure out the features, protocols, pins and stuff
 
 **total time spent: 6.25 hours**
+
+# august 25: schematics pt.2
+
+back to work RAAAAAAAAWR
+
+unrelated note: the stm website was down for several hours :<
+
+to recap, the features i'm going to have to consider in the pinout are:
+- mic
+- camera
+- flash memory
+- GPS
+- BLE
+- microSD card interface 
+
+the mems mic i'm using (SPG08P4HM4H-1)
+
+![microphone pinout and pad dimensions](journal_images/mic_pinout.png)
+
+has a total of 6 pins, 3 of which are power-related with `SELECT` being connected to ground, leaving `DATA` and `CLOCK`.
+
+note: if you're wondering why this is taking ages, documentation on octospi and making camera modules is hard to find :/ (decided to leave those for another time)
+
+considering changing modems for gps tbh cos the LC76GABMD doenst support spi...
+
+continuing tmr!!!
