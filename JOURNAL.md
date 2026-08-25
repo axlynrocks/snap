@@ -128,3 +128,5 @@ note: if you're wondering why this is taking ages, documentation on octospi and 
 considering changing modems for gps tbh cos the LC76GABMD doenst support spi...
 
 continuing tmr!!!
+
+**total time spent: 1.6 hours**
