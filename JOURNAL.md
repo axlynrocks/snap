@@ -130,3 +130,25 @@ considering changing modems for gps tbh cos the LC76GABMD doenst support spi...
 continuing tmr!!!
 
 **total time spent: 1.6 hours**
+
+# august 26: 2 hours of my life gone because of navigation, bluetooth, the economy, and bad planning
+
+so apparently the LC76GABMD **does** support SPI and i was looking at an old piece of documentation the manufacturer never bothered to update lmao
+
+with that said, i now have the option to connect it via I2C, UART or SPI, and i'll be choosing SPI for its data transfer speed
+
+note: i've been looking for different modules (from the same manufacturer, i've taken a liking to their docs) that support bluetooth as well, problem is they all cost upwards of 50$ except this one module, the EG912UGLAC-I05-SNNSA for about 20$ however despite the features and decent price point, it's still overkill for this (i'll probably use it in a different project that would need it) so i'm going with the LC76GABMD and wait what *am* i using for bluetooth
+
+so apparently there are a couple of ways i could go about adding bluetooth support:
+1. switching MCUs from a STM32U3C5 (low power) to a STM32WB (bluetooth and other wireless protocol) and connecting it directly to an antenna
+2. adding a bluetooth to serial converter (the quality and reliability of which i highly doubt)
+3. adding another bluetooth module on top of the already existing navigation one (i don't know if that's even supported, contacted quectel about that earlier today and their response times are atrocious)
+4. switching modules to one that supports both natively (see note above)
+
+still thinking about it...
+
+on the plus side i found out an SD card reader can be set to use SPI so that's neat
+
+
+
+**total time wasted: 2 hours**
