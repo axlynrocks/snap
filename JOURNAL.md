@@ -152,3 +152,21 @@ still thinking about it...
 on the plus side i found out an SD card reader can be set to use SPI so that's neat
 
 **total time spent: 2 hours**
+
+# august 27: progress is slowly being made :D
+
+note: got carried away looking at stlink debuggers and decided it would be a good idea to design the debugging pins around the specifications for the STLINK-V3MINIE (note that the STLINK-V3MINI lacking an E is the obsolete version using the same board as the STLINK-V3MODS) so i can be ~~lazy and just plug it straight into my laptop~~ efficient
+
+after weighing my options, i decided to go with...
+
+~~the Adding Multiple Modules on Board™ route to save on cost. i chose the M66FB-03-STD module supporting bluetooth and cellular, i'll connect it to the MCU via UART~~ (sorry i have a problem with deciding on things within less than 1 business day lets hope i don't change this again) 
+
+using the (maybe not so overkill) EG912UGLAC-I05-SNNSA to both solve my bluetoothless predicament and replace the LC76GABMD for navigation support
+
+for the next hour i will attempt to understand the reference and hardware design .pdf(s) while deciding how i should connect it to the MCU! according to the spec sheet it supports the following interfaces: *inhales* (U)SIM, UART, USB 2.0, Digital Audio (PCM), Analog Audio, ADC, I2C, SPI, LCM, Camera, SD Card, and three antennae (woa)
+
+![decent block diagram](journal_images/EG912U_block_diagram.png)
+
+"wait did i just see aUdIo?!?!? and a cAmErA"
+
+**total time spent: 2.3 hours**
