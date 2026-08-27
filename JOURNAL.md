@@ -151,4 +151,4 @@ still thinking about it...
 
 on the plus side i found out an SD card reader can be set to use SPI so that's neat
 
-**total time wasted: 2 hours**
+**total time spent: 2 hours**
