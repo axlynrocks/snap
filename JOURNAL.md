@@ -170,3 +170,17 @@ for the next hour i will attempt to understand the reference and hardware design
 "wait did i just see aUdIo?!?!? and a cAmErA"
 
 **total time spent: 2.3 hours**
+
+# august 28: researched the STLINK-V3MINIE and reference designs
+
+note: i was actually planning to try and finally understand what OCTOSPI is but i...
+
+continued my getting carried away streak and looked at the datasheet for the STLINK-V3MINIE, apparently it uses the FTSH-107-01-L-DV-K-A connector in particular for connecting to boards via a STDC14 header
+
+![STLINK-V3MINIE STDC14 pinout](journal_images/STLINK-V3MINIE_STDC14_pinout.png)
+
+expertly demonstrating my electrical ineptitude, i then proceeded to decide to adapt stuff from the  NUCLEO-G474 thanks to this [stack overflow answer](https://electronics.stackexchange.com/a/649973)
+
+![totally not stealing the NUCLEO-G474's STDC14 conn schematic](journal_images/NUCLEO-G474_STDC14_schematic.png)
+
+**total time spent: 1 hour**
