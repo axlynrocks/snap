@@ -184,3 +184,31 @@ expertly demonstrating my electrical ineptitude, i then proceeded to decide to a
 ![totally not stealing the NUCLEO-G474's STDC14 conn schematic](journal_images/NUCLEO-G474_STDC14_schematic.png)
 
 **total time spent: 1 hour**
+
+# august 29: searching for a camera (and npu) that doesn't exist (or does it?)
+
+after getting back on track to hopefully finally figure out how to arrange all the connections i'm currently looking for a camera!
+
+my criteria for the camera module are primarily autofocus and mv
+
+the autofocus should be simple enough: just get a camera module with motorized focus and either add a LIDAR to detect depth (overkill) or use an subject recognition algorithm and adjust focus according to subject sharpness
+
+the MV, which im going to use for object detection and **potentially** other postprocessing stuff to make the saved media higher quality
+
+i'll have to find a SoC or ASIC- ACTUALLY NVM i just found out that the STM32U3C5RIT6Q comes with a HSP i can offload some MV functions off onto saving me routing time and HC some money (win-win hehe)
+
+note: i paused lookout for 10 mins :<
+
+ok component finding time RAAAAAAWR >:3c
+
+i am HIGHLY considering making my own camera module (i'll need to check my calendar for my exam dates later)
+
+something that comes to mind is the raspberry pi camera module 3 but unfortunately the STM32U3C5RIT6Q doesnt support DCMI.
+
+![alt text](journal_images/raspberry_pi_camera_module_3.png)
+
+either way i just remembered i'll need to add some M3 standoffs to mount this above the main PCB 
+
+actually un-nevermind my earlier nevermind, just found out that the MCU won't have enough processing power for MV so i might have to scrap that idea ;A; (or i might consider changing MCUs)
+
+**total time spent: 1 hour**
