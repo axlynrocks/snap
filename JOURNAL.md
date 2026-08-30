@@ -212,3 +212,13 @@ either way i just remembered i'll need to add some M3 standoffs to mount this ab
 actually un-nevermind my earlier nevermind, just found out that the MCU won't have enough processing power for MV so i might have to scrap that idea ;A; (or i might consider changing MCUs)
 
 **total time spent: 1 hour**
+
+# august 30: continuing the search for the ideal camera
+
+note: lemme jst get somethin out of the way uhhh if anyone's gonna read this i started this at 11:45pm and pushed a commit a couple minutes after with the total hrs spent at 1 cos i didn't want to lose my streak >///< (it's recorded in lapse tho dw)!
+
+![placeholder img for now](journal_images/gas_station_cat.png)
+
+placeholder img for now
+
+**total time spent: 1 hour**
