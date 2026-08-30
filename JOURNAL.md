@@ -213,12 +213,24 @@ actually un-nevermind my earlier nevermind, just found out that the MCU won't ha
 
 **total time spent: 1 hour**
 
-# august 30: continuing the search for the ideal camera
+# august 30: continuing the search for the ideal not a camera
 
 note: lemme jst get somethin out of the way uhhh if anyone's gonna read this i started this at 11:45pm and pushed a commit a couple minutes after with the total hrs spent at 1 cos i didn't want to lose my streak >///< (it's recorded in lapse tho dw)!
 
-![placeholder img for now](journal_images/gas_station_cat.png)
+~~now that i've (unfortunately) decided to scrap the onboard MV i'm gonna go with making my own camera module~~
 
-placeholder img for now
+decided to switch MCUs to a more capable processor (unfortunately axing the ultra low power capabilities of the STM32U3 series but oh well) right now i'm looking at either the 
+ - STM32H7 series (bonus points for being included on one of my fave camera modules)
+ - or the STM32N6 series cos they come with inbuilt NPUs (woaaa!!!) but they have crazy pin counts in a BGA format
 
-**total time spent: 1 hour**
+gotta weigh my options so i don't go overkill with this (also considering time limits cos my exams are coming up TwT)
+
+![the glorious astounding STM32H735VG](journal_images/STM32H735VG.png)
+
+eventually decided on the STM32H735VG cos an NPU isn't worth going insane over attempting to route a VFBGA with 142 pins at minimum on just 4 layers (at least one of which will inevitably be a gnd plane)
+
+fortunately, the STM32H735VG has support for DCMI so i'll be sticking with the raspberry pi camera module 3
+
+unfortunately switching MCUs also means i now have to read through even more docs and rethink some of my earlier choices (you win some, you lose some lol)
+
+**total time spent: 1.3 hours**
