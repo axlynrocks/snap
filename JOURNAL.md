@@ -235,7 +235,7 @@ unfortunately switching MCUs also means i now have to read through even more doc
 
 **total time spent: 1.3 hours**
 
-## august 31: fixing up the BOM
+# august 31: fixing up the BOM
 
 had to make an emergency change to the MCU (again) cos i forgot the STM32H735VG didn't have a JPEG codec peripheral, switched it to the STM32H7B3VIT6
 
