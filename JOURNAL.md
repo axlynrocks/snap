@@ -234,3 +234,36 @@ fortunately, the STM32H735VG has support for DCMI so i'll be sticking with the r
 unfortunately switching MCUs also means i now have to read through even more docs and rethink some of my earlier choices (you win some, you lose some lol)
 
 **total time spent: 1.3 hours**
+
+## august 31: fixing up the BOM
+
+had to make an emergency change to the MCU (again) cos i forgot the STM32H735VG didn't have a JPEG codec peripheral, switched it to the STM32H7B3VIT6
+
+to recap the BOM now includes the following:
+1. STM32H735VGT6 (MCU)
+2. MX25L3233FM2I-08G (external QSPI flash)
+3. EG912UGLAC-I05-SNNSA (comms module)
+4. 1575AT43A0040001E (GNSS antenna)
+5. 2450AD18A6050002E (bluetooth antenna)
+6. 0830AT54A2200001E (cellular antenna)
+7. SPG08P4HM4H-1 (MEMS mic)
+8. CLMVC-FKA-CL1D1L71BB7C3C3 (status led)
+9. SC32S-7PF20PPM (LSE osc)
+10. ECS-80-18-23B-JTN-TR (osc)
+11. DM3AT-SF-PEJM5 (microSD conn)
+12. SIM8051-6-0-14-01-A (microSIM conn)
+13. FTSH-107-01-L-DV-K-A (debug conn)
+
+as well as an additional
+
+14. STLINK-V3MINIE (debugger, not on board)
+
+will be making the camera module tmr!!!(similar to the openMV OV5640 FPC Camera Module stay tuned) eepy...
+
+aforementioned items come to a rough
+
+![component cost estimate](journal_images/estimates.png)
+
+USD68.66 :D
+
+**total time spent: 2.8 hours**
