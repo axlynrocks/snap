@@ -386,3 +386,32 @@ some of the following steps have been adapted (aka stolen) from the how to [run 
 and there you have it, generated antennas :3
 
 **total time spent: 6.5 hours**
+
+# september 2: making even more ECAD models
+
+note: i changed the mic to a MMICT5848-00-012 mic cos it supports I2S, also the docs for the ECS-80-18-23B-JTN-TR were little more than an afterthought
+
+## the MMICT5848-00-012:
+
+unlike the previous components, this one does NOT come with a manufacturer-provided symbol or footprint so i'll have to follow [the datasheet](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8902/MMMICT5848-00-012.pdf) and *actually* make my own... (hey, at least the docs are good)
+
+![diagram showing the recommended PCB land pattern and solder paste stencil pattern layouts](journal_images/MMICT5848-00-012_PCB_land_pattern_solder_paste_stencil_pattern.png)
+(chapter 9, PCB design and land pattern layout, figures 33 and 34)
+
+note: thinking about its actual placement, i might make a flex PCB to mount this on and connect to the main board instead for better audio quality
+
+![diagram showing the mic's actual dimensions in 3D with tolerances](journal_images/MMICT5848-00-012_outline_dimensions.png)
+(chapter 11, outline dimensions, figure 35)
+
+![diagram and table outlining the mic's pinout](journal_images/MMICT5848-00-012_pinout.png)
+(chapter 3, pin configurations and function descriptions)
+
+btw i based my footprint design off of one of the kicad library's other MEMS mics
+
+![screenshot of a kicad window showing the MMICT5848-00-012 symbol](journal_images/MMICT5848-00-012_symbol.png)
+
+now it's time for the footprint!
+
+actually i'll do this later lol
+
+**total hours spent: 1 hour**
