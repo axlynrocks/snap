@@ -1,3 +1,4 @@
 (sym_lib_table
 	(version 7)
+	(lib (name "EG912U-GL") (type "KiCad") (uri "${KIPRJMOD}/components/EG912U-GL.kicad_sym") (options "") (descr ""))
 )
