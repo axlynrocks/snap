@@ -414,4 +414,4 @@ now it's time for the footprint!
 
 actually i'll do this later lol
 
-**total hours spent: 1 hour**
+**total time spent: 1 hour**
