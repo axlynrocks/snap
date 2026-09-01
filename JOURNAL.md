@@ -267,3 +267,92 @@ aforementioned items come to a rough
 USD68.66 :D
 
 **total time spent: 2.8 hours**
+
+# september 1: stealing ST's ref designs and making ECAD models
+
+so apparently i just found out that unlike the STM32U3C5RIT6Q the docs don't exactly come with a reference design and instead just point you to an eval/devboard :/
+
+and i just remembered we need to get the component symbols :O
+
+"gonna look for the symbols and footprints!", quote by me before i realized most online ECAD resources (except for the 3D models suck)
+
+making my own footprints now, wish me luck!
+
+~~## the STM32H7B3VIT6
+so the STM32H7B3VIT6, as denoted by the V in its name stands for 100 pins/balls and the T for an LQFP package~~
+
+just realized some of these components already have their symbols and footprints in the official kicad libraries uhhh
+- [x] STM32H7B3VIT6 (MCU)
+- [x] MX25L3233FM2I-08G (external QSPI flash)
+- [ ] EG912UGLAC-I05-SNNSA (comms module)
+- [ ] 1575AT43A0040001E (GNSS antenna)
+- [ ] 2450AD18A6050002E (bluetooth antenna)
+- [ ] 0830AT54A2200001E (cellular antenna)
+- [ ] SPG08P4HM4H-1 (MEMS mic)
+- [x] CLMVC-FKA-CL1D1L71BB7C3C3 (status led)
+- [ ] SC32S-7PF20PPM (LSE osc)
+- [ ] ECS-80-18-23B-JTN-TR (osc)
+- [x] DM3AT-SF-PEJM5 (microSD conn)
+- [ ] SIM8051-6-0-14-01-A (microSIM conn)
+- [ ] FTSH-107-01-L-DV-K-A (debug conn)
+
+so while looking for symbols for the EG912UGLAC-I05-SNNSA (non-existent btw) apparently kicad has an easter egg!
+
+![sneaky lil easter egg](journal_images/kicad_easter_egg.png) 
+
+(and its datasheet is a german document for the eu's agricultural products regulation 2013)
+
+now moving on to actually making them:
+
+## the EG912UGLAC-I05-SNNSA:
+
+the footprint and the symbols were actually available on its [product page](https://www.quectel.com/product/lte-cat-1-bis-eg912u-gl) under hardware specs as a zip file with the footprint & part so now i just have to convert it into a kicad lib (for the record, i *almost* attempted to manually design one from its 2D dimensions file)
+
+and after quite a while of figuring out why some random kicad functions didn't work it's finally done! :>
+
+so just to put this down,
+
+for the schematic and footprint:
+
+1. opened the symbols (there were multiple units) and footprint in their respective editors, (however for the symbol i needed to manually import it in cos it wasn't a kicad file)
+2. created and saved the symbols and footprint under a library by the same name
+
+![screenshot of a kicad window showing the EG912U-GL symbol](journal_images/EG912U-GL_kicad_symbol.png)
+![screenshot of a kicad window showing the EG912U-GL footprint](journal_images/EG912U-GL_kicad_footprint.png)
+
+for the 3D model:
+
+1. i saved the provided .sldasm as a .step and shoved it in the folder
+2. connected it to the footprint and moved it to match their positions
+
+note: i let kicad decide how to arrange the layers in the footprint, but i had to switch the stuff on the user.5 layer to the f.courtyard layer to avoid an error while saving the footprint after linking its 3D model
+
+![screenshot of a kicad window showing the EG912U-GL 3D model on a PCB](journal_images/EG912U-GL_kicad_3D_model.png)
+
+# the antennas (1575AT43A0040001E, 2450AD18A6050002E, 0830AT54A2200001E):
+
+note: apparently most engineers use antennas (with the english pluralization -s) instead of antennae (with the latinate pluralization for it -ae)
+
+this time around, i wasn't able to get any manufacturer-provided 3D models so we'll have to do without :<
+
+however all 3 of these components are pretty basic SMDs with 2 pins, only varying in dimension
+
+since kicad already includes symbols for pcb chip antennas, i'll just need to make the footprints by following their respective datasheets
+
+however, looking at the symbols, to ensure that i follow kicad design rules i'm going to be using one of their generators following [this guide](https://gitlab.com/groups/kicad/libraries/-/wikis/Generators/Run-a-generator), but now there seems to be an issue cos i managed to track down 2 of the components in the kicad official libraries, namely the Johanson_2450AT18x100_2400-2500Mhz, Johanson_2450AT43F0100_2400-2500Mhz, which were generated with the [`SMD_2terminal_chip_molded`](https://gitlab.com/kicad/libraries/kicad-library-tools/-/tree/main/src/generators/SMD_2terminal_chip_molded) generator instead of the [`RF_chip_antenna`](https://gitlab.com/kicad/libraries/kicad-library-tools/-/tree/main/src/generators/RF_chip_antenna?ref_type=heads) generator
+
+how odd...
+
+managed to find the  history behind one of the aforementioned footprints, [its footprint commit](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89), and [its generator input .yaml](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89) ~~and i'm still unsure as to whether they were created with the wrong generator~~ literally right after i wrote this i looked at the commit dates and the antenna i just mentioned was created in 2020 while the `RF_chip_antenna` generator was made in 2025
+
+ran `./generate.py -l` according to the generator guide and realized that `SMD_2terminal_chip_molded` makes footprints only and `RF_chip_antenna` makes 3D models only
+
+right now my priority is getting (and learning how to make) the footprints, so i'll be using `SMD_2terminal_chip_molded` to get a couple of footprints
+
+note: on the topic of generators, if you check out the datasheet for the 2450AD18A6050002E, and scroll to the bit about dimensions you'll notice that compared to the other antennas, this one has an extra dimension listed as `b` but this won't affect the footprints so i'm ignoring it lmao i just wasted about 5 mins of your time XD
+
+created a .yaml in the components [folder here](components/antennas.yaml) adapted from [this commit](https://github.com/cnieves1/kicad-footprint-generator/blob/4583d5840302e15422bcefdb8015ca8986d507a7/scripts/SMD_chip_package_rlc-etc/size_definitions/size_Johanson_antenna_chip_devices.yaml) 
+
+AND I JUST REALIZED I GOTTA PUSH BEFORE 11:59pm
+
+**total time spent: 4.5 hours**
