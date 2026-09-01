@@ -329,7 +329,7 @@ note: i let kicad decide how to arrange the layers in the footprint, but i had t
 
 ![screenshot of a kicad window showing the EG912U-GL 3D model on a PCB](journal_images/EG912U-GL_kicad_3D_model.png)
 
-# the antennas (1575AT43A0040001E, 2450AD18A6050002E, 0830AT54A2200001E):
+## the antennas (1575AT43A0040001E, 2450AD18A6050002E, 0830AT54A2200001E):
 
 note: apparently most engineers use antennas (with the english pluralization -s) instead of antennae (with the latinate pluralization for it -ae)
 
