@@ -385,4 +385,4 @@ some of the following steps have been adapted (aka stolen) from the how to [run 
 
 and there you have it, generated antennas :3
 
-**total time spent: 4.5 hours**
+**total time spent: 6.5 hours**
