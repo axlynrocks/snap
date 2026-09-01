@@ -349,10 +349,40 @@ ran `./generate.py -l` according to the generator guide and realized that `SMD_2
 
 right now my priority is getting (and learning how to make) the footprints, so i'll be using `SMD_2terminal_chip_molded` to get a couple of footprints
 
-note: on the topic of generators, if you check out the datasheet for the 2450AD18A6050002E, and scroll to the bit about dimensions you'll notice that compared to the other antennas, this one has an extra dimension listed as `b` but this won't affect the footprints so i'm ignoring it lmao i just wasted about 5 mins of your time XD
-
-created a .yaml in the components [folder here](components/antennas.yaml) adapted from [this commit](https://github.com/cnieves1/kicad-footprint-generator/blob/4583d5840302e15422bcefdb8015ca8986d507a7/scripts/SMD_chip_package_rlc-etc/size_definitions/size_Johanson_antenna_chip_devices.yaml) 
+note: on the topic of generators, if you check out the datasheet for the 2450AD18A6050002E, and scroll to the bit about dimensions you'll notice that compared to the other antennas, this one has an extra dimension listed as `a` (not the same with the other `a`s where their `a` is this one's `b`) but this won't affect the footprints so i'm ignoring it lmao i just wasted about 5 mins of your time XD
 
 AND I JUST REALIZED I GOTTA PUSH BEFORE 11:59pm
+
+ok back to work finally (just rushed to push and forgot to both include images and i also accidentally split the journal entry into 2 by making this section's header a h1 instead of a h2)
+
+just going to leave the links to their datasheets here for convenience: [1575AT43A0040001E datasheet](https://www.johansontechnology.com/docs/4411/Antenna-1575AT43A0040001E.pdf), [2450AD18A6050002E datasheet](https://www.johansontechnology.com/docs/4892/Antenna-2450AD18A6050002E.pdf), [0830AT54A2200001E datasheet](https://www.johansontechnology.com/docs/3908/Antenna-0830AT54A2200001E-Rev3.0.pdf)
+
+ok so after screwing around with the generator CLI for a while, here's my (not definitive) guide on how to generate custom symbols with the `SMD_2terminal_chip_molded` generator for idiots like me! (please don't come after me kicad devs)
+
+1. clone the [kicad library tools](https://gitlab.com/kicad/libraries/kicad-library-tools/) repo somewhere, for the purposes of this i just shoved it into my home folder and didn't bother to change the folder name so it's at `~/kicad-library-tools` if you put it somewhere else go ahead and keep that in mind in regards to the paths and commands here
+
+2. follow the [setup guide](https://gitlab.com/groups/kicad/libraries/-/wikis/Generators/Setup) and skip installing the relevant 3D packages stuff as well as configuring the git repo
+
+4. modify `~/kicad-library-tools/data/SMD_2terminal_chip_molded/antenna_chip.yaml` with your favorite editor and replace it with [this antenna_chip.yaml](components/antenna_chip.yaml) instead where i just inserted the size specs for the 3 antennas this project uses
+
+some of the following steps have been adapted (aka stolen) from the how to [run a generator guide](https://gitlab.com/groups/kicad/libraries/-/wikis/Generators/Run-a-generator) (if you're a lil dense like me that means read the stuff at the bottom not follow the guide)
+
+5. change your directory to the generators dir with
+
+    ```bash
+    cd src/generators
+    ```
+
+6. run this line over here
+
+    ```bash
+    ./generate.py -f ~/snap/components/stuff -g SMD_2terminal_chip_molded
+    ```
+
+    where `-f` specifies the output path for the generated footprints (here's a warning that this line will generate a bunch of other components in that folder besides the antennas btw), and `-g` specifies the generator to be executed
+
+7. once the folder's been generated, navigate to the `RF_Antenna.pretty` folder in it and extract the 3 antennas (`Johanson_0830AT54A2200001E.kicad_mod`, `Johanson_1575AT43A0040001E.kicad_mod`, and `Johanson_2450AD18A6050002E.kicad_mod`) and absolutely NUKE all the other junk
+
+and there you have it, generated antennas :3
 
 **total time spent: 4.5 hours**
