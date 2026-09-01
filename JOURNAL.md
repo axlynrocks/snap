@@ -240,7 +240,7 @@ unfortunately switching MCUs also means i now have to read through even more doc
 had to make an emergency change to the MCU (again) cos i forgot the STM32H735VG didn't have a JPEG codec peripheral, switched it to the STM32H7B3VIT6
 
 to recap the BOM now includes the following:
-1. STM32H735VGT6 (MCU)
+1. STM32H7B3VIT6 (MCU)
 2. MX25L3233FM2I-08G (external QSPI flash)
 3. EG912UGLAC-I05-SNNSA (comms module)
 4. 1575AT43A0040001E (GNSS antenna)
