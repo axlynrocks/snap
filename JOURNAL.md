@@ -415,3 +415,53 @@ now it's time for the footprint!
 actually i'll do this later lol
 
 **total time spent: 1 hour**
+
+# september 2: making even more ECAD models pt.2
+
+just realized i paused lookout for 20 mins...
+
+## the MMICT5848-00-012 (continued): 
+
+anyways, i learned the footprint requires a couple of main things:
+
+![screenshot of a kicad window showing the MMICT5848-00-012 footprint](journal_images/MMICT5848-00-012_footprint.png)
+
+the pads, in this case all except 3 were SMD, with 3 being THT for the mic's sound hole
+
+the solder paste layer is all according to the datasheet, except i couldn't figure out how to make the broken ring pads around pad 3, so i used the inner and outer diameters  and made 4 80deg arcs instead
+
+the [courtyard](https://klc.kicad.org/footprint/f5/f5.3.html), [fab](https://klc.kicad.org/footprint/f5/f5.2.html) and [silkscreen](https://klc.kicad.org/footprint/f5/f5.1.html) layers are made according to the kicad KLC rules (to the best of my ability)
+
+## the oscillators (SC32S-7PF20PPM, ECS-80-18-23B-JTN-TR): 
+
+the oscillators also have non-part-specific symbols in the kicad library, `Crystal` and `Crystal_GND24` respectively
+
+so it's just a matter of designing the footprints for them!
+
+datasheets here for convenience: [SC32S-7PF20PPM](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7329/SC-32S.pdf), [ECS-80-18-23B-JTN-TR](https://ecsxtal.com/store/pdf/ecx_64r.pdf)
+
+![diagram showing the recommended PCB land pattern for the SC32S-7PF20PPM](journal_images/SC32S-7PF20PPM_PCB_land_pattern.png)
+
+![screenshot of a kicad window showing the SC32S-7PF20PPM footprint](journal_images/SC32S-7PF20PPM_footprint.png)
+
+![diagram showing the recommended PCB land pattern for the ECS-80-18-23B-JTN-TR](journal_images/ECS-80-18-23B-JTN-TR_PCB_land_pattern.png)
+
+![screenshot of a kicad window showing the ECS-80-18-23B-JTN-TR footprint](journal_images/ECS-80-18-23B-JTN-TR_footprint.png)
+
+## the SF72S006VBDR2500:
+
+note: also changed up the nano SIM connector because the SIM8051-6-0-14-01-A doesn't have a card detecting switch (also up to this entry i appear to have mixed up the micro and nano SIM sizes)
+
+and it's already available with a symbol and footprint in the kicad libraries as `JAE_SIM_Card_SF72S006`
+
+yay less work for me :3
+
+## the FTSH-107-01-L-DV-K-A:
+
+the FTSH-107-01-L-DV-K-A comes with a manufacturer-provided 3D model whose generator, which i've just noticed, is also powered by cadenac (the exact same as the sim connector i originally intended to use)
+
+and now i'm getting tired of making footprints (rly wanna get back to making the actual schematic) so im just downloading it off of snapmagic (if it helps, samtec explicitly advertises it so...)
+
+however, although snapmagic also provides a symbol for it, i'll be using one of the kicad connector symbols instead
+
+**total time spent: 3.4 hours**
