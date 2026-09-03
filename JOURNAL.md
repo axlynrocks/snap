@@ -492,6 +492,8 @@ note: i'm still referring to [this tutorial](https://roboticworx.io/blogs/projec
 
 first order of business: decoupling caps
 
+![alt text](journal_images/STM32H7B3xI_power_supply_component_layout.png)
+
 following the 
 
 **total time spent: 0.5 hours**
