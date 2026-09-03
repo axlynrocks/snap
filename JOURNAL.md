@@ -497,3 +497,12 @@ first order of business: decoupling caps
 following the 
 
 **total time spent: 0.5 hours**
+
+# september 3: actually starting to do the schematics pt.2
+
+note: i'm pushing this thing early to save my streak cos im on the road and my laptop WILL die soon (dw i'll actually do this later) 
+
+please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
+![meowmoew](journal_images/gas_station_cat.png)
+
+**total time spent: 1 hour**
