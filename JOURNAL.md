@@ -505,4 +505,70 @@ note: i'm pushing this thing early to save my streak cos im on the road and my l
 please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
 ![meowmoew](journal_images/gas_station_cat.png)
 
-**total time spent: 1 hour**
+IM BACK (btw i started at about 11:30pm)
+
+### the decoupling caps:
+
+ok so referring to the diagram above (prev entry), the SMPS stuff is unrelated (this specific MCU doesn't have one, also it was out of stock)
+
+note that all decoupling caps have to be as close as possible to their respective pins
+
+i'm wiring the VCAP pins to a 2.2uF cap, "LDO enabled or disabled: 100 nF close to each VCAPx pin, VCAPx connected together."
+
+VDD50USB, VDD33USB not present
+
+VREF- also unavailable, and i quote, "VREF+ input is not available on all package (refer to Table 1. STM32H7B3xI features and peripheral counts)
+whereas VREF– is available only on UFBGA176+25, TFBGA225 with SMPS and TFBGA216. When VREF- is
+not available, it is internally connected to VSSA." (thanks ST)
+
+PDR_ON not present
+
+note: felt the amount of caps was off and realized i started at the second page of the cap specs
+
+for the VDD pins, "100 nF ceramic, for each VDD as close as possible to the pins. A 4.7 μF ceramic connected to one of the VDD pins." which can be summarized as n x 100nF + 4.7uF where n is the amount of VDDs the MCU has! this one has 5 so you can do the math
+
+VREF+, VDDA, and VBAT just need a 1uF and a 100nF
+
+VDDMMC, VDDSMPS, VLXSMPS, VFBSMPS, VDD not present
+
+![kicad schematic showing decoupling capacitors for the STM32H7B3VIT6](journal_images/STM32H7B3VIT6_decoupling_capacitors.png)
+
+(honestly a lot less than i thought there'd be)
+
+### the clocks:
+
+the STM32H7B3VIT6 supports up to 4 clocks, an internal HSE and LSE, and their external counterparts, however due to the internal oscillators' questionable accuracy (especially with tasks that can cause the MCU to heat up drastically) i'll be opting to use the external ones exclusively
+
+i'll be using a 8MHz crystal for the HSE, and a 
+32.768kHz crystal for the LSE
+
+the pinout has PH0 as OSC_IN, PH1 as OSC_OUT, PC14 as OSC32_IN (but it says OSC32_ON in the datasheet, most likely a typo), and PC15 as OSC32_OUT
+
+as for the caps, according to [this article](https://support.microchip.com/s/article/Calculating-crystal-load-capacitor), "Assuming the same value is used for C1 and C2... : C1 = C2 = 2 * (CL – Cstray)", and, "Cstray... is often approximated as 5pF."
+
+with those values and also looking at the datasheets for both the caps ([SC32S-7PF20PPM](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7329/SC-32S.pdf), [ECS-80-18-23B-JTN-TR](https://ecsxtal.com/store/pdf/ecx_64r.pdf)), the CL for the 8MHz crystal is anywhere between 6-12.5pf, and the 32.768kHz one is from 10-20pF
+
+i'll be going with 10pF for the first cap and 20pF for the second, doing the math leaves us with the values: 10pF, and 30pF respectively (totally didn't steal this from the guide hehe)
+
+![kicad schematic showing the clocks for the STM32H7B3VIT6](journal_images/STM32H7B3VIT6_clocks.png)
+
+### the STDC14 connector
+
+i'll be using the `Conn_02x07_Odd_Even` symbol for this!
+
+![alt text](journal_images/STLINK-V3MINIE_STDC14_pinout.png)
+
+according to the STLINK-V3MINIE pinout (and the MB1363 nucleo devboard schematics), 
+
+- pins 1, 2, and 9 are reserved
+- pin 3 is for VCC
+- pins 5 and 7 are both for GND
+- pin 4 is for SWDIO
+- pin 6 is for SWCLK
+- pin 8 is for SWO
+- pin 10 is for JTDI
+- pin 12 is for
+
+will continue later
+
+**total time spent: 2.22 hours**
