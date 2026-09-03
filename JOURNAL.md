@@ -465,3 +465,33 @@ and now i'm getting tired of making footprints (rly wanna get back to making the
 however, although snapmagic also provides a symbol for it, i'll be using one of the kicad connector symbols instead
 
 **total time spent: 3.4 hours**
+
+## september 2: actually starting to do the schematics with all these new parts
+
+just to recap, (and to make sure i don't use the wrong parts) the BOM for the onboard components now includes the following:
+
+1. STM32H7B3VIT6 (MCU)
+2. MX25L3233FM2I-08G (external QSPI flash)
+3. EG912UGLAC-I05-SNNSA (comms module)
+4. 1575AT43A0040001E (GNSS antenna)
+5. 2450AD18A6050002E (bluetooth antenna)
+6. 0830AT54A2200001E (cellular antenna)
+7. ~~SPG08P4HM4H-1~~ now MMICT5848-00-012 (MEMS mic)
+8. CLMVC-FKA-CL1D1L71BB7C3C3 (status led)
+9. SC32S-7PF20PPM (LSE osc)
+10. ECS-80-18-23B-JTN-TR (osc)
+11. DM3AT-SF-PEJM5 (microSD conn)
+12. ~~SIM8051-6-0-14-01-A~~ now SF72S006VBDR2500 (microSIM conn)
+13. FTSH-107-01-L-DV-K-A (debug conn)
+
+i'm missing stuff like voltage regulators and USBC connectors but i'll just try my best to use parts with kicad symbols and footprints for them
+
+## bare minimum stuff for the MCU:
+
+note: i'm still referring to [this tutorial](https://roboticworx.io/blogs/projects/build-custom-stm32s-from-scratch-tutorial) as well as [this](https://embeddedprojects101.com/design-a-battery-powered-stm32-board-with-usb/)
+
+first order of business: decoupling caps
+
+following the 
+
+**total time spent: 0.5 hours**
