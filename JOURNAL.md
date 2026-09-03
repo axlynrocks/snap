@@ -466,7 +466,7 @@ however, although snapmagic also provides a symbol for it, i'll be using one of 
 
 **total time spent: 3.4 hours**
 
-## september 2: actually starting to do the schematics with all these new parts
+# september 2: actually starting to do the schematics with all these new parts
 
 just to recap, (and to make sure i don't use the wrong parts) the BOM for the onboard components now includes the following:
 
