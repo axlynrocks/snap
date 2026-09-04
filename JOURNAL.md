@@ -572,3 +572,23 @@ according to the STLINK-V3MINIE pinout (and the MB1363 nucleo devboard schematic
 will continue later
 
 **total time spent: 2.22 hours**
+
+# september 4: actually starting to do the schematics pt.3
+
+### the STDC14 connector (continued)
+
+- pin 11 is for GNDDETECT (it has to also be grounded as well apparently)
+- pin 12 is for NRST
+- pins 13 and 14 are for Rx and Tx respectively
+
+note: i just found out apparently the STLINK-V3MINIE uses a STM32F723 MCU which imo is really overkill for a debugger
+
+i'm also using an ESD on the connector pins to make sure my board stays functional (i don't have the best track record with electronics in general)
+
+![kicad schematic showing the debug connector and ESD for the STM32H7B3VIT6](journal_images/STM32H7B3VIT6_debug_connector_esd.png)
+
+the MCU has a couple of specialized pins for this exact purpose too btw
+
+![table showing the STM32H7B3VIT6's debug pins](journal_images/STM32H7B3VIT6_SWJ_debug_pins.png)
+
+**total time spent: 1 hour**
