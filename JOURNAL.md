@@ -592,3 +592,21 @@ the MCU has a couple of specialized pins for this exact purpose too btw
 ![table showing the STM32H7B3VIT6's debug pins](journal_images/STM32H7B3VIT6_SWJ_debug_pins.png)
 
 **total time spent: 1 hour**
+
+# september 5: actually starting to do the schematics pt.4
+
+## the boot and reset buttons
+
+i'm using the PTS526SM15SMTR2 LFS for both buttons and that means i'll be making the footprints for them
+
+![diagram showing the recommended PCB land pattern](journal_images/PTS526SM15SMTR2_LFS_PCB_land_pattern.png)
+
+very angry note: also, whoever made the dimensions here needs to be fired. what on earth is a "4-0.7". that is not standard notation. the very first result thane i looked up "number minus number datasheet dimension" was a [stack exchange question](https://electronics.stackexchange.com/q/450137) asking the exact same thing about this specific datasheet.
+
+![screenshot of a kicad window showing the PTS526SM15SMTR2 LFS footprint](journal_images/PTS526SM15SMTR2_LFS_footprint.png)
+
+![kicad schematic showing the boot and reset buttons for the STM32H7B3VIT6](journal_images/STM32H7B3VIT6_buttons.png)
+
+will continue later
+
+**total time spent: 1.15 hours**
