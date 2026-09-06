@@ -633,4 +633,4 @@ back to the RGB LED, well shit i didnt save now i gotta redo this
 
 not done with the resistor values, will continue after pushing to save my streak
 
-**total hours spent: 1.1 hours**
+**total time spent: 1.1 hours**
