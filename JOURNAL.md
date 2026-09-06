@@ -610,3 +610,27 @@ very angry note: also, whoever made the dimensions here needs to be fired. what 
 will continue later
 
 **total time spent: 1.15 hours**
+
+# september 6: actually starting to do the schematics pt.5
+
+note: so apparently i was busy for a day or so and later actually just means tomorrow...
+
+### the RGB LED
+
+for this i'm going to be using the LED with transistors to hook the led up to vdd, they need pulldown resistors as well
+
+got carried away and attempted to use the STM32CubeMX IDE to partially configure the pins to breakout, then my laptop decided to forget to turn its backlight back on after i had it go to sleep for some reason
+
+here they are so far: 
+
+![breakout pt.1](journal_images/STM32B3H7VIT6_breakout_1.png)
+
+anyways
+
+back to the RGB LED, well shit i didnt save now i gotta redo this 
+
+![kicad schematic showing the RGB LED for the STM32H7B3VIT6](STM32B3H7VIT6_RGB_LED.png)
+
+not done with the resistor values, will continue after pushing to save my streak
+
+**total hours spent: 1.1 hours**
