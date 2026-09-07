@@ -642,7 +642,7 @@ note: pushing early to save my streak, apparently my laptop HAS to reinstall win
 please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
 ![meowmoew](journal_images/gas_station_cat.png)
 
-IM BACK (btw i started at about 11:30pm)
+~~IM BACK (btw i started at about 11:30pm)~~ accidentally copied that bit, disregard it i'll most likely start at 11:45 idk
 
 ### the RGB LED (continued)
 
