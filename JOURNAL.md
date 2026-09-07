@@ -629,7 +629,7 @@ anyways
 
 back to the RGB LED, well shit i didnt save now i gotta redo this 
 
-![kicad schematic showing the RGB LED for the STM32H7B3VIT6](STM32B3H7VIT6_RGB_LED.png)
+![kicad schematic showing the RGB LED for the STM32H7B3VIT6](journal_images/STM32B3H7VIT6_RGB_LED.png)
 
 not done with the resistor values, will continue after pushing to save my streak
 
@@ -639,11 +639,19 @@ not done with the resistor values, will continue after pushing to save my streak
 
 note: pushing early to save my streak, apparently my laptop HAS to reinstall windows or something...
 
-please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
-![meowmoew](journal_images/gas_station_cat.png)
-
-~~IM BACK (btw i started at about 11:30pm)~~ accidentally copied that bit, disregard it i'll most likely start at 11:45 idk
+alright i'm back!!! (it's 10:50 rn)
 
 ### the RGB LED (continued)
+
+![kicad schematic showing the RGB LED for the STM32H7B3VIT6 but now with values for the resistors](journal_images/STM32B3H7VIT6_RGB_LED.png)
+
+note: here i decided to split the schematic into multiple sheets, so far i have 
+
+1. the main sheet
+2. MCU power
+3. MCU peripherals (clocks, LED)
+4. STLINK connector
+
+besides this i also attempted to learn how to do hierarchical schematics in kicad
 
 **total time spent: 1 hour**
