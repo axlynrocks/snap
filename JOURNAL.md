@@ -634,3 +634,16 @@ back to the RGB LED, well shit i didnt save now i gotta redo this
 not done with the resistor values, will continue after pushing to save my streak
 
 **total time spent: 1.1 hours**
+
+# september 7: actually starting to do the schematics pt.6
+
+note: pushing early to save my streak, apparently my laptop HAS to reinstall windows or something...
+
+please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
+![meowmoew](journal_images/gas_station_cat.png)
+
+IM BACK (btw i started at about 11:30pm)
+
+### the RGB LED (continued)
+
+**total time spent: 1 hour**
