@@ -655,3 +655,11 @@ note: here i decided to split the schematic into multiple sheets, so far i have
 besides this i also attempted to learn how to do hierarchical schematics in kicad
 
 **total time spent: 1 hour**
+
+# september 8: actually starting to do the schematics pt.7
+
+note: pushing early cos i forgot the time
+
+![cat](journal_images/gas_station_cat.png)
+
+**total time spent: 1 hour**
