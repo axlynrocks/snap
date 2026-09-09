@@ -656,10 +656,28 @@ besides this i also attempted to learn how to do hierarchical schematics in kica
 
 **total time spent: 1 hour**
 
-# september 8: actually starting to do the schematics pt.7
+# september 8: small schematic hiatus
 
-note: pushing early cos i forgot the time
+note: pushing early cos i forgot the time (i think this is gonna be routine from now on, classes are eating away at my time, the only free time i have is past 11pm, no schematic work today i was too tired for that)
 
-![cat](journal_images/gas_station_cat.png)
+started 11:50 so i mean this should count right
 
-**total time spent: 1 hour**
+just researched some stuff on how battery management works and how to power the MCU
+
+i'll be separating the battery management module from the main board, bringing the total board count to 3: the main PCB, the camera module and the battery management module
+
+read [this guide to power supply design](https://wiki.st.com/stm32mcu/wiki/Basics_of_power_supply_design_for_MCU) by ST
+
+helpful note: the [solutions page](https://wiki.st.com/stm32mcu/wiki/Solutions) on the ST wiki's just really helpful in general, if you're also trying to learn STM32 MCU dev plz read that as well as the datasheet and getting started documents for your MCU
+
+my requirements for the battery module are that it holds one cell (preferably a LiPo if i can source one), it can charge by connecting b2b to the USB-C connector on the main board
+
+![block diagram of a general battery management circuit](journal_images/battery_management_block_diagram.png)
+
+diagram stolen from [here](https://www.allaboutcircuits.com/technical-articles/introduction-to-battery-management-systems/)
+
+note 1: just realized i forgot to turn lapse on so i KNOW this is gonna get deflated 
+
+note 2: weird commit time cos i went to sleep after forgetting to push
+
+**total time spent: 1.5 hours**
