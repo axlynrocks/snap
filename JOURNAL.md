@@ -681,3 +681,42 @@ note 1: just realized i forgot to turn lapse on so i KNOW this is gonna get defl
 note 2: weird commit time cos i went to sleep after forgetting to push
 
 **total time spent: 1.5 hours**
+
+# september 9: actually starting to do the schematics pt.7
+
+taking a break from the MCU related stuff, time to move on to comms!
+
+## communication stuff: 
+
+all the communication stuff here's based off of the EG912UGLAC-I05-SNNSA, developer resources [here](https://developer.quectel.com/en/modules-cat/eg912u-series) 
+
+wait.
+
+well shit apparently i can't read.
+
+ok uhhh apparently the EG912UGLAC-I05-SNNSA doesn't support GNSS or BT and the docs were actually referring to the EG912UGLAA... welp time to look for another cos even the EG912UGLAA is completely out of stock everywhere
+
+decided to axe BT and switch to the BG95-MF 
+
+so... now i have to go through extracting the footprint and symbol (i'll leave the prev EG912U-GL models here for future use)
+
+i followed the exact same steps
+as i did for the EG912UGLAC-I05-SNNSA except the .step file was provided
+
+![screenshot of a kicad window showing the BG95 symbol](journal_images/BG95_kicad_symbol.png)
+
+![screenshot of a kicad window showing the BG95 footprint](journal_images/BG95_kicad_footprint.png)
+
+note: a couple hours later i realized that kicad already has a symbol and footprint for that, ended up replacing the footprint i extracted with a copy of the kicad one and just added the manufacturer-provided 3D model to it, however i kept the extracted symbol 
+
+![screenshot of a kicad window showing the BG95 3D model on a PCB](journal_images/BG95_kicad_3D_model.png)
+
+now, with that settled i can finally get to work on the schematic yayyyy
+
+### the antennas:
+
+for this i'll be using the bluetooth and main (LTE) antenna (even though the BG95-MF has wifi capabilities)
+
+![alt text](image.png)
+
+**total time spent: 1 hour**
