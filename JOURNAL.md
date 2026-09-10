@@ -717,6 +717,24 @@ now, with that settled i can finally get to work on the schematic yayyyy
 
 for this i'll be using the bluetooth and main (LTE) antenna (even though the BG95-MF has wifi capabilities)
 
+TBC
+
+### connecting it to the MCU
+
 ![alt text](image.png)
 
-**total time spent: 1 hour**
+TBC
+
+note: i realized it was 11:57 and forgot to push, clutched in under 2 mins saving my streak!!!
+
+### the micro SIM card
+
+continued configuring the MCU 
+
+![reference design schematic for the SIM](journal_images/cellular_module_SIM_schematic.png)
+
+![alt text](journal_images/STM32B3H7VIT6_breakout_2.png)
+
+TBC
+
+**total time spent: 2.5 hours** 

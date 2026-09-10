@@ -3616,6 +3616,30 @@
 			)
 		)
 	)
+	(global_label "MAIN_RXD_MCU"
+		(shape input)
+		(at 90.17 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2b01057a-bafd-4ef7-b9a8-e8423b5c28df")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 107.3671 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "LED_B"
 		(shape output)
 		(at 44.45 111.76 180)
@@ -3688,6 +3712,30 @@
 			)
 		)
 	)
+	(global_label "MAIN_RTS_MCU"
+		(shape output)
+		(at 90.17 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "57904c54-5bfc-432c-9558-e66179e7080a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 107.0647 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "T_SWO"
 		(shape input)
 		(at 90.17 88.9 0)
@@ -3725,6 +3773,30 @@
 		(uuid "83fac735-6a53-4024-9fbd-d71f94be010e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 102.0679 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "MAIN_TXD_MCU"
+		(shape output)
+		(at 90.17 38.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8505e530-192c-4018-88bb-b6f1bfb81c05")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 107.0647 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3829,6 +3901,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "MAIN_CTS_MCU"
+		(shape input)
+		(at 90.17 116.84 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e96c41e7-24ea-4141-9b63-a19628f81206")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 107.0647 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -4967,7 +5063,7 @@
 		)
 	)
 	(sheet
-		(at 111.76 33.02)
+		(at 264.16 105.41)
 		(size 12.7 12.7)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4983,7 +5079,7 @@
 		)
 		(uuid "1528ec03-e464-4fb7-bd6c-9d9cd0048866")
 		(property "Sheetname" "MCU power"
-			(at 111.76 32.3084 0)
+			(at 264.16 104.6984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4994,7 +5090,7 @@
 			)
 		)
 		(property "Sheetfile" "MCU_power.kicad_sch"
-			(at 111.76 46.3046 0)
+			(at 264.16 118.6946 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5013,7 +5109,7 @@
 		)
 	)
 	(sheet
-		(at 111.76 52.07)
+		(at 264.16 124.46)
 		(size 12.7 12.7)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5029,7 +5125,7 @@
 		)
 		(uuid "30bc4f14-5132-4afa-931c-1b472d17388c")
 		(property "Sheetname" "MCU peripherals"
-			(at 111.76 51.3584 0)
+			(at 264.16 123.7484 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5040,7 +5136,7 @@
 			)
 		)
 		(property "Sheetfile" "MCU_peripherals.kicad_sch"
-			(at 111.76 65.3546 0)
+			(at 264.16 137.7446 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5059,7 +5155,53 @@
 		)
 	)
 	(sheet
-		(at 111.76 71.12)
+		(at 264.16 85.09)
+		(size 13.97 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "5c5470eb-b10a-403b-901b-28e48c58cd3d")
+		(property "Sheetname" "comms"
+			(at 264.16 84.3784 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "comms.kicad_sch"
+			(at 264.16 95.8346 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "snap"
+				(path "/30fc28b6-2d62-4a7d-b2af-6de294b3b238"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 264.16 143.51)
 		(size 12.7 12.7)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5075,7 +5217,7 @@
 		)
 		(uuid "cd2b6aaa-e037-4a7d-a24c-dbfe4c6b2497")
 		(property "Sheetname" "STLINK connector"
-			(at 111.76 70.4084 0)
+			(at 264.16 142.7984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5086,7 +5228,7 @@
 			)
 		)
 		(property "Sheetfile" "STLINK_connector.kicad_sch"
-			(at 111.76 84.4046 0)
+			(at 264.16 156.7946 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

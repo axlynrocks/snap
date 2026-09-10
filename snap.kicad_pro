@@ -648,7 +648,7 @@
         "uuid": "30fc28b6-2d62-4a7d-b2af-6de294b3b238"
       }
     ],
-    "used_designators": "",
+    "used_designators": "U1-2,R1-3,J2-3,#PWR1,#PWR47-48,D3,D5,C14-19",
     "variants": []
   },
   "sheets": [
@@ -667,6 +667,10 @@
     [
       "cd2b6aaa-e037-4a7d-a24c-dbfe4c6b2497",
       "STLINK connector"
+    ],
+    [
+      "5c5470eb-b10a-403b-901b-28e48c58cd3d",
+      "comms"
     ]
   ],
   "text_variables": {},
