@@ -738,3 +738,17 @@ continued configuring the MCU
 TBC
 
 **total time spent: 2.5 hours** 
+
+# september 10: deciding on which pins to breakout
+
+remembered that instead of wracking my brain trying to figure out what pins go where i should just settle the breakouts first... eheh ;>
+
+and in order to do that i should probably make a proper BOM
+
+![preview of the BOM as a table, for details see BOM.csv](journal_images/BOM_1.png)
+
+now that that's done it's time to go over how to wire up the components
+
+the clocks take 2 pins each, here they are `PC14-OSC32_IN` and `PC15-OSC32_OUT` for the LSE, and `PH0-OSC_IN` and `PH1-OSC_OUT` for the HSE
+
+**total time spent: 1 hour**
