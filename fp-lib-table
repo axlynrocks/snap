@@ -9,4 +9,5 @@
 	(lib (name "ECS-80-18-23B-JTN-TR") (type "KiCad") (uri "${KIPRJMOD}/components/ECS-80-18-23B-JTN-TR.pretty") (options "") (descr ""))
 	(lib (name "FTSH-107-01-L-DV-K-A") (type "KiCad") (uri "${KIPRJMOD}/components/FTSH-107-01-L-DV-K-A.pretty") (options "") (descr ""))
 	(lib (name "PTS526SM15SMTR2_LFS") (type "KiCad") (uri "${KIPRJMOD}/components/PTS526SM15SMTR2_LFS.pretty") (options "") (descr ""))
+	(lib (name "BG95") (type "KiCad") (uri "${KIPRJMOD}/components/BG95.pretty") (options "") (descr ""))
 )
