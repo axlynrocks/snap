@@ -739,7 +739,7 @@ TBC
 
 **total time spent: 2.5 hours** 
 
-# september 10: deciding on which pins to breakout
+# september 10: deciding on which pins to breakout and making a BOM
 
 remembered that instead of wracking my brain trying to figure out what pins go where i should just settle the breakouts first... eheh ;>
 
@@ -747,8 +747,52 @@ and in order to do that i should probably make a proper BOM
 
 ![preview of the BOM as a table, for details see BOM.csv](journal_images/BOM_1.png)
 
+## breakouts
+
 now that that's done it's time to go over how to wire up the components
 
 the clocks take 2 pins each, here they are `PC14-OSC32_IN` and `PC15-OSC32_OUT` for the LSE, and `PH0-OSC_IN` and `PH1-OSC_OUT` for the HSE
+
+the DCMI interface (unshockingly) use a whole lot of pins: (slave 8 bits external sync)
+
+1. `PA4-DCMI_HSYNC`
+2. `PA6-DCMI_PIXCLK`
+3. `PA9-DCMI_D0`
+4. `PB7-DCMI_VSYNC`
+5. `PB13-DCMI_D2`
+6. `PC7-DCMI_D1`
+7. `PC9-DCMI_D3`
+8. `PD3-DCMI_D5`
+9. `PE4-DCMI_D4`
+10. `PE5-DCMI_D6`
+11. `PE6-DCMI_D7`
+
+i'm choosing to directly drive the SD card via SDMMC instead of SPI
+
+1. `PB13-SDMMC1_D0`
+2. `PC9-SDMMC1_D1`
+3. `PC10-SDMMC1_D2`
+4. `PC11-SDMMC1_D3`
+5. `PC12-SDMMC1_CK`
+6. `PD2-SDMMC1_CMD`
+
+the BG95MFLA-64-SGNS uses
+2 UARTs, one with CTS/RTS hardware flow control and one without for the cellular and GNSS respectively as well as 10 GPIOs for other features
+
+the cellular UART
+
+1. `PE7-UART7_RX`
+2. `PE8-UART7_TX`
+3. `PE9-UART7_RTS`
+4. `PE10-UART7_CTS`
+
+the GNSS UART
+
+1. `PB6-UART5_TX`
+2. `PB12-UART5_RX`
+
+TBC
+
+note: paused lapse for 20 mins AND forgot to push. welp.
 
 **total time spent: 1 hour**
