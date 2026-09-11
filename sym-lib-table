@@ -3,4 +3,6 @@
 	(lib (name "EG912U-GL") (type "KiCad") (uri "${KIPRJMOD}/components/EG912U-GL.kicad_sym") (options "") (descr ""))
 	(lib (name "MMICT5848-00-012") (type "KiCad") (uri "${KIPRJMOD}/components/MMICT5848-00-012.kicad_sym") (options "") (descr ""))
 	(lib (name "BG95") (type "KiCad") (uri "${KIPRJMOD}/components/BG95.kicad_sym") (options "") (descr ""))
+	(lib (name "SGM2036S-ADJXN5G_TR") (type "KiCad") (uri "${KIPRJMOD}/components/SGM2036S-ADJXN5G_TR.kicad_sym") (options "") (descr ""))
+	(lib (name "CSD25310Q2") (type "KiCad") (uri "${KIPRJMOD}/components/CSD25310Q2.kicad_sym") (options "") (descr ""))
 )

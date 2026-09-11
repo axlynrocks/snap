@@ -648,29 +648,13 @@
         "uuid": "30fc28b6-2d62-4a7d-b2af-6de294b3b238"
       }
     ],
-    "used_designators": "",
+    "used_designators": "D1-7,#PWR1-38,#PWR46-61,C1-45,Y3-4,Q1,Q7-11,J1,J3,R1-13,R16-23,SW3-4,U1-2,U4-6,FB1,AE1,AE3,L1-2",
     "variants": []
   },
   "sheets": [
     [
       "30fc28b6-2d62-4a7d-b2af-6de294b3b238",
       "snap"
-    ],
-    [
-      "1528ec03-e464-4fb7-bd6c-9d9cd0048866",
-      "MCU power"
-    ],
-    [
-      "30bc4f14-5132-4afa-931c-1b472d17388c",
-      "MCU peripherals"
-    ],
-    [
-      "cd2b6aaa-e037-4a7d-a24c-dbfe4c6b2497",
-      "STLINK connector"
-    ],
-    [
-      "5c5470eb-b10a-403b-901b-28e48c58cd3d",
-      "comms"
     ]
   ],
   "text_variables": {},

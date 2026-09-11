@@ -796,3 +796,83 @@ TBC
 note: paused lapse for 20 mins AND forgot to push. welp.
 
 **total time spent: 1 hour**
+
+# september 11: time to lock in for the schematic!!!
+
+note: for anyone that has to review this or anything if i pause for a while i'm most likely reviewing schematics on a second monitor (excluding the ones on this laptop)
+
+so to start i'm going to just undo all the organization and turn the schematic into one large page and reorganize them later
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+i have no idea what i did here so i'm redoing that
+
+first, according to the reference design
+
+![alt text](image-3.png)
+
+i did this to simplify figuring out which pins to breakout later and where, right now i'm treating this like i'm literally making a eval module with all the necessary protections
+
+![alt text](image-4.png)
+
+since i'm using a battery and the BG95-MF in particular i'll have to power the module at 4V even though its minimum is 3.3V (same as the MCU)
+
+now it recommends the SGM2019-ADJYN5G/TR LDO but we're going to replace it directly with the [SGM2036S-ADJXN5G/TR](https://www.sg-micro.com/rect/assets/17ec502a-e4c4-4cc4-8df9-77986a7c65af/SGM2036S.pdf?access_token=JB0xlRQ-10F_vQg1XXqsnx8zy4iF65LO) with the exact same footprint 
+
+![alt text](image-5.png)
+
+edited the AP2204K-ADJ in the kicad symbol lib and made a copy with a new symbol name and changed the name of one of the pins to match the SGM2036S-ADJXN5G/TR
+
+![alt text](image-6.png)
+
+i'm going to be excluding the ALC5616 audio codec power supply because it's going to be storing the audio on the SD card and not being used for calls and stuff
+
+this one's a more detailed view of the power supply design with batteries
+
+![alt text](image-7.png)
+
+and here i'm excluding the wifi antenna interface and using an active antenna design for the GNSS antenna
+
+for a second i got confused as to why chip antennas have 2 pins then i realized one's just supposed to be left floating and is mainly for mechanical support (iirc)
+
+and i learned that NM stands for not mounted
+
+on the antenna power supply section you might notice that there are seemingly 2 power supplies: `DC_5V` and `VBAT`, they're actually just there to signify how to power it depending on if you're using batteries or a dc pwr supply for it, hence the `NF_0R`
+
+![alt text](image-8.png)
+
+also stealing from the CSD25302Q2 symbol in the kicad lib with the same footprint following the same steps as the AP2204K-ADJ
+
+for the pwr supply decoupling caps, since the WS05DP isn't in production anymore, i'm using the ESD9B5.0ST5G as an alternative to them
+
+![alt text](image-9.png)
+
+next, for the UART level shifters:
+
+![alt text](image-10.png)
+
+the reference design recommends using the TXS0108EPWR with 8 channels for the main UART, but says nothing much about the GNSS UART level shifter, only that both UART level shifters are 1.8 - 3.3V, so i asked for advice in the hc `#hardware`
+
+"i'm making a schematic that involves level shifting and my reference design uses a TXS0108EPWR with 8 channels. i need to add 2 more channels to support another one of my components and both of the level shifters are 1.8 - 3.3V, but should i use the recommended component with another level shifter with 2 channels or merge them and use a level shifter with 10 channels?" - me
+
+while waiting for advice i'm going to be doing the antennas first
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+![alt text](image-13.png)
+
+moving on, adding 2 status LEDs:
+
+![alt text](image-14.png)
+
+it calls for the RUM001L02T2CL, but i'm substituting them for 2x DMG1012T-7 transistors because i already use them for the RGB LED
+
+also realized i forgot to add the CLMVC-FKA-CL1D1L71BB7C3C3 as the component value for the RGB LED
+
+TBC!!!
+
+**total time spent: 5 hours**
