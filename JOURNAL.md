@@ -876,3 +876,242 @@ also realized i forgot to add the CLMVC-FKA-CL1D1L71BB7C3C3 as the component val
 TBC!!!
 
 **total time spent: 4 hours**
+
+# september 12: time to lock in for the schematic!!! (continued)
+
+note: back after pushing, NOT SLEEPING TONIGHT RAAAAAAWR
+
+back to that bit about the status LED, the HB-CLM3A-BKW-GKW LEDs don't exactly have a matching footprint or a standard footprint in the kicad footprint lib, so i'm using the `LED_PLCC-2_3x2mm_AK` footprint. note that this is the `AK` variant and not the `KA` variant, 
+
+![alt text](image-15.png)
+
+as specified by the diagram here
+
+and i got confused by which one would connect which way lol
+
+![alt text](image-16.png)
+
+time to get to work on the SIM card connector, which i'm just realizing was one of the things i deleted but oh well it wasn't finished anyways
+
+![alt text](image-17.png)
+
+the symbol `JAE_SIM_Card_SF72S006` specifies shielding and the card detection switch is open by default, so i'm wiring both `CSW` and `SH` to ground
+
+in the schematic section i deleted i used the PESD3V3LSUY but apparently i didn't notice that the reference design specifies that the esd array's parasitic capacitance shouldn't exceed 15pF, which the PESD3V3LSUY exceeds at a typical 22pF so its time to look for another
+
+i'm going to be using the TPD5E003DPFR instead, with the `WSON-6-1EP_3x3mm_P0.95mm` footprint (had to make sure that their dimensions were compatible)
+
+i made a copy of the `PESD3V3L5UY` symbol and edited it to be connected to the `WSON-6-1EP_3x3mm_P0.95mm` footprint, fortunately both have pin 2 as ground and the rest as their respective pins
+
+![alt text](image-18.png)
+
+checking the connections took a while lol trying to make sure everything was connected to the right caps and pins
+
+now for the mcu interface bit, 
+
+![alt text](image-3.png)
+
+this section (mentioned above somewhere) is actually also part of the reference design hehe
+
+![alt text](image-19.png)
+
+the schematic calls for the DTC043ZE, but i'm using the [DTC143Z](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/digital/dtc143ze3-e.pdf) (specifically the SMD one from ROHM and not the THT one from onsemi) cos it has a symbol in kicad and
+
+annoyed note: i have been trying to find resources to understand SOT dimensions for a solid maybe 20 mins. i know what a SOT-23 is, it's available as a footprint in kicad, but what on earth is a SOT-723
+
+so. apparently for the DTC143Z, the footprint sizes that appear in the footprint dropdown when you add a symbol to a schematic are NOT COMPREHENSIVE. I HAVE SUCCESSFULLY WALKED IN CIRCLES FOR IDK HOW LONG.
+
+ahem
+
+anyways
+
+i'll be using the DTC143ZEB as a drop in replacement for the DTC043E, with the `SOT-416` footprint in the kicad footprint library (even though the component itself uses a SOT-416FL footprint i'm just hoping it works out)
+
+HOLY ELITE PULL
+
+i found this [website](https://blog.mbedded.ninja/pcb-design/component-packages/sot-416-component-package/) with tons of resources for embedded devices!!! (why didn't i find it earlier TwT) 
+
+note to reader: PLEASE HAVE A LOOK AT THE WEBSITE TRUST ME ITS PEAK
+
+anyways according to it the land pattern dimensions are slightly different... and i just realized i can use the other version with gullwing leads that match the kicad footprint 
+
+so now i'm using the DTC143ZE3  (sung to the tune of the chorus of payphone by maroon 5)
+
+as well as the 2SC4617TLQ with a generic npn transistor symbol which also uses an `SOT-416` footprint
+
+ok i can finally get back to stealing the reference design hehe >:3c
+
+![alt text](image-20.png)
+
+i just realized the GNSS UART level shifter i was looking for is apparently at the bottom using a SN74AVC2T245RSWR
+
+hm.
+
+i should learn to check the entire .pdf before saying something's missing.
+
+anyways the SN74AVC2T245RSWR uses a 10-UQFN (1.8x1.4) footprint available in kicad as `UQFN-10_1.4x1.8mm_P0.4mm`
+
+![alt text](image-21.png)
+
+it doesn't have a symbol in the kicad symbol lib, so i had to make one by stealing from the SN74AVC4T245PW symbol and adapting it to the pins
+
+![alt text](image-22.png)
+
+and also since i don't need my previous question answered anymore, i can finally finish the main UART level shifter
+
+![alt text](image-23.png)
+
+also realized that the the GNSS active antenna and PON_TRIG power supplies had `ANTENNA_3V` and `PON_TRIG_1V8` switched lol
+
+next for the module interface design where we shove everything together:
+
+![alt text](image-24.png)
+
+i'm going to be excluding a whole lot of pins for stuff i'm not using 
+
+so according to the reference design, there are 2 ways to power the PON_TRIG pin, depending on if your MCU outputs 3.3V directly, and i almost tried to do some really unnecessary stuff (aka. solution 1 with a weird ass transistor)
+
+i'm using solution 2 (powering it directly with the MCU's 3.3V output)
+
+also i forgot to do the analog switch so i'm doing that bit now
+
+![alt text](image-25.png)
+
+the analog switch uses a [FSA2567MPX](https://www.onsemi.com/pdf/datasheet/fsa2567-d.pdf) with a `UQFN-16-1EP_3x3mm_P0.5mm_EP1.75x1.75mm` footprint (no symbol though, had to refer to the datasheet's pin assignments and make one from scratch, also i got lazy and copied the reference design one instead of the fancy datasheet one)
+
+![alt text](image-26.png)
+
+i just realized that i don't need one.
+
+apparently because i'm only using one USIM and no ESIM the only thing i have to do is wire them directly. adding the analog switch and following the instructions in the table on what 0R resistors to add in this case wire sel to gnd and remove the esim entirely, making the analog switch absolutely USELESS.
+
+hm.
+
+welp at least i have its symbol if i need to use it next time
+
+now back to the whole connecting everything back to the RF module again,
+
+![alt text](image-27.png)
+i realized that 2 of the pins were unnecessary: `POWER_ON/OFF_MCU` and `CODEC_POWER_ENA_MCU` so i removed them
+
+![alt text](image-28.png)
+
+now all the stuff for the RF module specifically should be done!!! :>
+
+i still won't be organizing them yet tho
+
+now i have to make the camera module!
+
+time to do a lil research on what DCMI is and how to make camera modules for it... i kinda want to do something similar to how openMV did theirs clipping and screwing straight onto the main board
+
+also noticed that i used the wrong component for the main antenna lol, fixed it right after
+
+![alt text](image-29.png)
+
+RESEARCH TIME RAWRRR
+
+soooooooo in the august 29 entry i said some stuff about autofocus and mv... i also feel like getting a wide FOV because well the more stuff saved the better 
+
+i've found a sensor that looks to be pretty useful: the IMX708 (with a 120deg fov lens) now the thing is, why is there ZERO documentation on the sensors or the camera modules (not the PCBs the literal modules the ones with the sensor and lens)
+
+FAAAAHHHHHHHH.sfx
+
+so apparently most camera modules online don't come with datasheets specifically because the manufacturers don't release them to the public, and when they do release them, they hand it to companies under NDAs
+
+well that sucks
+
+now i have 2 options: continue scouring for something on forums and build my own or use one of openMV's cameras
+
+lemme ask #hardware on hc slack
+
+THERE'S LITERALLY NOTHING. except for onsemi which does make image sensors but not modules (the very fact that they have free docs is surprising)
+
+welp i give up. adding the openmv camera module to the BOM later :< hey at least their customer support's quick, replied to my email in 10 mins
+
+now on getting it connectable to the main board, the openMV cams all use a slightly outdated connector: the DF12(3.0)-36DP-0.5V(86) header and DF12A-36DS-0.5V(81) receptacle (but tbh it looks like it should be the other way based on their shape)
+
+the manufacturer (hirose) offers a new almost identical set of components as a drop in replacement: the DF12NB(3.0)-36DP-0.5V(51) header and the DF12NB(3.0)-36DS-0.5V(51) receptacle
+
+according to [this datasheet](https://www.hirose.com/en/product/document?clcode=&productname=&series=DF12N&documenttype=Catalog&lang=en&documentid=ed_DF12N_20200819) (for the new parts btw) there are 2 main variants: the DF12NB with solder tabs and the DF12NC without and kicad happens to only have footprints for the DF12NC
+
+so for the symbol i'll use the `Conn_02x18_Odd_Even_MountingPin` symbol and as for the footprint i'll edit the existing one in kicad and just add the solder tabs
+
+![alt text](image-30.png)
+
+it came with a manufacturer provided 3D model too!
+
+![alt text](image-31.png)
+
+stealing the openMV cam H7's schematics so this board can be compatible,
+
+![alt text](image-32.png)
+
+![alt text](image-33.png)
+
+thanks to me from a couple entries ago,
+
+note: the following will not be about cameras AT ALL instead i will attempt to figure out how to wire everything to the MCU
+
+> the DCMI interface (unshockingly) use a whole lot of pins: (slave 8 bits external sync)
+> 
+> 1. `PA4-DCMI_HSYNC`
+> 2. `PA6-DCMI_PIXCLK`
+> 3. `PA9-DCMI_D0`
+> 4. `PB7-DCMI_VSYNC`
+> 5. `PB13-DCMI_D2`
+> 6. `PC7-DCMI_D1`
+> 7. `PC9-DCMI_D3`
+> 8. `PD3-DCMI_D5`
+> 9. `PE4-DCMI_D4`
+> 10. `PE5-DCMI_D6`
+> 11. `PE6-DCMI_D7`
+
+comparing the current pins to the H7's it seems i'm missing a bunch of pins, specifically the `DCMI_CLK`, `DCMI_FSIN`, and `DCMI_PWDN` pins as well as a set of SPI and I2C pins
+
+after adding the SPI and I2C pins, i now have the additional:
+
+1. `PA11-SPI2_NSS`
+2. `PB10-SPI2_SCK`
+3. `PC1-SPI2_MOSI`
+4. `PC2_C-SPI2_MISO`
+5. `PB10-12C2_SCL`
+6. `PB11-2C2_SDA`
+
+going back over the components on this board, 
+there are the following,
+
+for the camera conn:
+
+ - 1x DCMI (Slave 8 bits External Synchro)
+ - 1x I2C (I2C)
+ - 1x SPI (Full Duplex Master)
+
+for the RF module:
+
+ - 2x UART (Asynchronous, CTS/RTS) and (Asynchronous)
+ - 8x GPIO
+
+for the mic:
+
+ - 1x I2S (Half Duplex Master)
+
+for the RGB status LED:
+ - 3x GPIO
+
+for the external flash memory:
+
+ - 1x OCTOSPI (Quad SPI)
+
+for the clocks:
+
+- 1x RCC_OSC32
+- 1x RCC_OSC
+
+for the debugger conn:
+
+ - 1x Debug (JTAG 5 pins)
+ - 1x UART (Asynchronous)
+
+TBC
+
+**total time spent: 10 hours**
