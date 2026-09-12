@@ -1115,3 +1115,21 @@ for the debugger conn:
 TBC
 
 **total time spent: 10 hours**
+
+# september 12: time to lock in for the schematic!!! (continued even more)
+
+sooooo for all the components above, here's the new pinout (that may or may not be very hard to read)
+
+![alt text](image-34.png)
+
+and now that i have the pins locked in place, i can finally get back to the schematic!
+
+right now i'm having trouble figuring out what `DCMI_CLK`, `DCMI_RST`, `DCMI_FSIN`, `DCMI_PWDN` are supposed to be, since they aren't standard DCMI pins mentioned in the [docs](https://www.st.com/content/ccc/resource/technical/document/application_note/group0/c0/ef/15/38/d1/d6/49/88/DM00373474/files/DM00373474.pdf/jcr:content/translations/en.DM00373474.pdf), i'm assuming they're GPIO pins related to the camera's functions. the camera itself uses an [OV5640](https://cdn.sparkfun.com/datasheets/Sensors/LightImaging/OV5640_datasheet.pdf) sensor
+
+![alt text](image-35.png)
+
+i'm not done with the LDO for it yet because i just realized i should work out a power solution for the board first as well as the whole battery management module
+
+TBC
+
+**total time spent: 2.1 hours**
