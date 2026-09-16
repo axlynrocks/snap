@@ -6,41 +6,46 @@ created_at: "2026-08-21"
 ---
 
 # august 21: got started and ...
+
 started with making the README as all half-baked projects do and added the CERN-OHL to it :>
 
 ![the repository github page showing its README.md and other files](journal_images/snap_repo_homepage.png)
 
 decided to research what i wanted to put in this (i.e. the features) and came up with a few things:
- - a push-to-talk mic for making voice memos
- - secondary SD card storage (also i just learned that UHS-II microSD cards exist)
- - periodic GPS
- - a camera (hence the name)
- - BLE positioning
- - a dot matrix display
- - replaceable battery packs
+
+- a push-to-talk mic for making voice memos
+- secondary SD card storage (also i just learned that UHS-II microSD cards exist)
+- periodic GPS
+- a camera (hence the name)
+- BLE positioning
+- a dot matrix display
+- replaceable battery packs
 
 so far, the important parts i've mostly settled on are:
+
 1. mic: SPG08P4HM4H-1
 2. sd card connector: a DM3AT-SF-PEJM5 for microSD
 3. gps:
-    - chip antenna: 1575AT43A0040001E
-    - modem: LC76GABMD (according to its datasheet it doesnt use much power)
+   - chip antenna: 1575AT43A0040001E
+   - modem: LC76GABMD (according to its datasheet it doesnt use much power)
 4. camera: (on hold for now until i figure out whether i can use a module or i have to design one from scratch)
 
 i'll figure the rest of the features out as i go along lol
 
-i'm planning to also design (and hopefully 3D print) a couple of different enclosures to keep it attached on bag straps or on other stuff! still trying to think about how to solve the issue of this stuff not being used in *questionable* ways... 
+i'm planning to also design (and hopefully 3D print) a couple of different enclosures to keep it attached on bag straps or on other stuff! still trying to think about how to solve the issue of this stuff not being used in _questionable_ ways...
 
 for some of the features above dealing with sensitive data i could add data encryption but thats a story for another time
 
 **total time spent: 2.5 hours**
 
 # august 22: started work on the microcontroller!
+
 started off looking up what microcontroller i should use,
 some stuff that contributed to my final decision were
- - how power intensive it is
- - if it has enough gpios for all the features
- - cryptography support!!! (wouldn't want *questionable* things to happen to the recordings so i should be encrypting user data)
+
+- how power intensive it is
+- if it has enough gpios for all the features
+- cryptography support!!! (wouldn't want _questionable_ things to happen to the recordings so i should be encrypting user data)
 
 so i eventually decided on the STM32U3C5RI cos it checks off all the criteria listed above! i started reading stuff on it to understand what i was working with (datasheets, guides, random oddly helpful reddit posts, etc.)
 
@@ -53,13 +58,15 @@ i'll be referring to this tutorial [here](https://roboticworx.io/blogs/projects/
 
 i'm probably not going to add an onboard STlink debugger (yet)
 
-so far i've learned about what goes into a devboard so i'll have to connect 
- - a voltage regulator (the MCU runs on 3.3V)
- - external OCTOSPI
+so far i've learned about what goes into a devboard so i'll have to connect
+
+- a voltage regulator (the MCU runs on 3.3V)
+- external OCTOSPI
 
 **total time spent: 4.5 hours**
 
 # august 23: schematics pt.1
+
 note that this is chronologically immediately after the previous journal entry i just wanted to break them in two it is currently 12am something as of writing this
 
 anyways b a c k to the journal entry!
@@ -84,10 +91,10 @@ also, note to self, make sure to check the contents of your commit before pushin
 
 anyways following this, i did this (btw VDDIO and VREF in figure 23 don't apply for the STM32U3C5RIT6 cos it doesn't have those pins) to complete the power decoupling caps!
 
-![schematic for power caps on MCU symbol B](journal_images/power_caps_B.png) 
+![schematic for power caps on MCU symbol B](journal_images/power_caps_B.png)
 ![schematic for power caps on MCU symbol A](journal_images/power_caps_A.png)
 
-next i looked at adding an oscillator to it, following (chapter 5, electrical characteristics, figure 23), 
+next i looked at adding an oscillator to it, following (chapter 5, electrical characteristics, figure 23),
 
 ![typical application with a 8 MHz crystal, refer to datasheet link above](journal_images/typical_application_with_a_8_MHz_crystal.png)
 
@@ -110,12 +117,13 @@ back to work RAAAAAAAAWR
 unrelated note: the stm website was down for several hours :<
 
 to recap, the features i'm going to have to consider in the pinout are:
+
 - mic
 - camera
 - flash memory
 - GPS
 - BLE
-- microSD card interface 
+- microSD card interface
 
 the mems mic i'm using (SPG08P4HM4H-1)
 
@@ -137,11 +145,12 @@ so apparently the LC76GABMD **does** support SPI and i was looking at an old pie
 
 with that said, i now have the option to connect it via I2C, UART or SPI, and i'll be choosing SPI for its data transfer speed
 
-note: i've been looking for different modules (from the same manufacturer, i've taken a liking to their docs) that support bluetooth as well, problem is they all cost upwards of 50$ except this one module, the EG912UGLAC-I05-SNNSA for about 20$ however despite the features and decent price point, it's still overkill for this (i'll probably use it in a different project that would need it) so i'm going with the LC76GABMD and wait what *am* i using for bluetooth
+note: i've been looking for different modules (from the same manufacturer, i've taken a liking to their docs) that support bluetooth as well, problem is they all cost upwards of 50$ except this one module, the EG912UGLAC-I05-SNNSA for about 20$ however despite the features and decent price point, it's still overkill for this (i'll probably use it in a different project that would need it) so i'm going with the LC76GABMD and wait what _am_ i using for bluetooth
 
 ![weirdly decently priced EG912UGLAC-I05-SNNSA](journal_images/EG912UGLAC-I05-SNNSA.png)
 
 so apparently there are a couple of ways i could go about adding bluetooth support:
+
 1. switching MCUs from a STM32U3C5 (low power) to a STM32WB (bluetooth and other wireless protocol) and connecting it directly to an antenna
 2. adding a bluetooth to serial converter (the quality and reliability of which i highly doubt)
 3. adding another bluetooth module on top of the already existing navigation one (i don't know if that's even supported, contacted quectel about that earlier today and their response times are atrocious)
@@ -159,11 +168,11 @@ note: got carried away looking at stlink debuggers and decided it would be a goo
 
 after weighing my options, i decided to go with...
 
-~~the Adding Multiple Modules on Board™ route to save on cost. i chose the M66FB-03-STD module supporting bluetooth and cellular, i'll connect it to the MCU via UART~~ (sorry i have a problem with deciding on things within less than 1 business day lets hope i don't change this again) 
+~~the Adding Multiple Modules on Board™ route to save on cost. i chose the M66FB-03-STD module supporting bluetooth and cellular, i'll connect it to the MCU via UART~~ (sorry i have a problem with deciding on things within less than 1 business day lets hope i don't change this again)
 
 using the (maybe not so overkill) EG912UGLAC-I05-SNNSA to both solve my bluetoothless predicament and replace the LC76GABMD for navigation support
 
-for the next hour i will attempt to understand the reference and hardware design .pdf(s) while deciding how i should connect it to the MCU! according to the spec sheet it supports the following interfaces: *inhales* (U)SIM, UART, USB 2.0, Digital Audio (PCM), Analog Audio, ADC, I2C, SPI, LCM, Camera, SD Card, and three antennae (woa)
+for the next hour i will attempt to understand the reference and hardware design .pdf(s) while deciding how i should connect it to the MCU! according to the spec sheet it supports the following interfaces: _inhales_ (U)SIM, UART, USB 2.0, Digital Audio (PCM), Analog Audio, ADC, I2C, SPI, LCM, Camera, SD Card, and three antennae (woa)
 
 ![decent block diagram](journal_images/EG912U_block_diagram.png)
 
@@ -179,7 +188,7 @@ continued my getting carried away streak and looked at the datasheet for the STL
 
 ![STLINK-V3MINIE STDC14 pinout](journal_images/STLINK-V3MINIE_STDC14_pinout.png)
 
-expertly demonstrating my electrical ineptitude, i then proceeded to decide to adapt stuff from the  NUCLEO-G474 thanks to this [stack overflow answer](https://electronics.stackexchange.com/a/649973)
+expertly demonstrating my electrical ineptitude, i then proceeded to decide to adapt stuff from the NUCLEO-G474 thanks to this [stack overflow answer](https://electronics.stackexchange.com/a/649973)
 
 ![totally not stealing the NUCLEO-G474's STDC14 conn schematic](journal_images/NUCLEO-G474_STDC14_schematic.png)
 
@@ -207,7 +216,7 @@ something that comes to mind is the raspberry pi camera module 3 but unfortunate
 
 ![alt text](journal_images/raspberry_pi_camera_module_3.png)
 
-either way i just remembered i'll need to add some M3 standoffs to mount this above the main PCB 
+either way i just remembered i'll need to add some M3 standoffs to mount this above the main PCB
 
 actually un-nevermind my earlier nevermind, just found out that the MCU won't have enough processing power for MV so i might have to scrap that idea ;A; (or i might consider changing MCUs)
 
@@ -219,9 +228,10 @@ note: lemme jst get somethin out of the way uhhh if anyone's gonna read this i s
 
 ~~now that i've (unfortunately) decided to scrap the onboard MV i'm gonna go with making my own camera module~~
 
-decided to switch MCUs to a more capable processor (unfortunately axing the ultra low power capabilities of the STM32U3 series but oh well) right now i'm looking at either the 
- - STM32H7 series (bonus points for being included on one of my fave camera modules)
- - or the STM32N6 series cos they come with inbuilt NPUs (woaaa!!!) but they have crazy pin counts in a BGA format
+decided to switch MCUs to a more capable processor (unfortunately axing the ultra low power capabilities of the STM32U3 series but oh well) right now i'm looking at either the
+
+- STM32H7 series (bonus points for being included on one of my fave camera modules)
+- or the STM32N6 series cos they come with inbuilt NPUs (woaaa!!!) but they have crazy pin counts in a BGA format
 
 gotta weigh my options so i don't go overkill with this (also considering time limits cos my exams are coming up TwT)
 
@@ -240,6 +250,7 @@ unfortunately switching MCUs also means i now have to read through even more doc
 had to make an emergency change to the MCU (again) cos i forgot the STM32H735VG didn't have a JPEG codec peripheral, switched it to the STM32H7B3VIT6
 
 to recap the BOM now includes the following:
+
 1. STM32H7B3VIT6 (MCU)
 2. MX25L3233FM2I-08G (external QSPI flash)
 3. EG912UGLAC-I05-SNNSA (comms module)
@@ -282,6 +293,7 @@ making my own footprints now, wish me luck!
 so the STM32H7B3VIT6, as denoted by the V in its name stands for 100 pins/balls and the T for an LQFP package~~
 
 just realized some of these components already have their symbols and footprints in the official kicad libraries uhhh
+
 - [x] STM32H7B3VIT6 (MCU)
 - [x] MX25L3233FM2I-08G (external QSPI flash)
 - [ ] EG912UGLAC-I05-SNNSA (comms module)
@@ -298,7 +310,7 @@ just realized some of these components already have their symbols and footprints
 
 so while looking for symbols for the EG912UGLAC-I05-SNNSA (non-existent btw) apparently kicad has an easter egg!
 
-![sneaky lil easter egg](journal_images/kicad_easter_egg.png) 
+![sneaky lil easter egg](journal_images/kicad_easter_egg.png)
 
 (and its datasheet is a german document for the eu's agricultural products regulation 2013)
 
@@ -306,7 +318,7 @@ now moving on to actually making them:
 
 ## the EG912UGLAC-I05-SNNSA:
 
-the footprint and the symbols were actually available on its [product page](https://www.quectel.com/product/lte-cat-1-bis-eg912u-gl) under hardware specs as a zip file with the footprint & part so now i just have to convert it into a kicad lib (for the record, i *almost* attempted to manually design one from its 2D dimensions file)
+the footprint and the symbols were actually available on its [product page](https://www.quectel.com/product/lte-cat-1-bis-eg912u-gl) under hardware specs as a zip file with the footprint & part so now i just have to convert it into a kicad lib (for the record, i _almost_ attempted to manually design one from its 2D dimensions file)
 
 and after quite a while of figuring out why some random kicad functions didn't work it's finally done! :>
 
@@ -343,7 +355,7 @@ however, looking at the symbols, to ensure that i follow kicad design rules i'm 
 
 how odd...
 
-managed to find the  history behind one of the aforementioned footprints, [its footprint commit](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89), and [its generator input .yaml](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89) ~~and i'm still unsure as to whether they were created with the wrong generator~~ literally right after i wrote this i looked at the commit dates and the antenna i just mentioned was created in 2020 while the `RF_chip_antenna` generator was made in 2025
+managed to find the history behind one of the aforementioned footprints, [its footprint commit](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89), and [its generator input .yaml](https://gitlab.com/kicad/libraries/kicad-footprints/-/commit/5c6d9d399ea63538d09524446daba99351a88d89) ~~and i'm still unsure as to whether they were created with the wrong generator~~ literally right after i wrote this i looked at the commit dates and the antenna i just mentioned was created in 2020 while the `RF_chip_antenna` generator was made in 2025
 
 ran `./generate.py -l` according to the generator guide and realized that `SMD_2terminal_chip_molded` makes footprints only and `RF_chip_antenna` makes 3D models only
 
@@ -363,23 +375,23 @@ ok so after screwing around with the generator CLI for a while, here's my (not d
 
 2. follow the [setup guide](https://gitlab.com/groups/kicad/libraries/-/wikis/Generators/Setup) and skip installing the relevant 3D packages stuff as well as configuring the git repo
 
-4. modify `~/kicad-library-tools/data/SMD_2terminal_chip_molded/antenna_chip.yaml` with your favorite editor and replace it with [this antenna_chip.yaml](components/antenna_chip.yaml) instead where i just inserted the size specs for the 3 antennas this project uses
+3. modify `~/kicad-library-tools/data/SMD_2terminal_chip_molded/antenna_chip.yaml` with your favorite editor and replace it with [this antenna_chip.yaml](components/antenna_chip.yaml) instead where i just inserted the size specs for the 3 antennas this project uses
 
 some of the following steps have been adapted (aka stolen) from the how to [run a generator guide](https://gitlab.com/groups/kicad/libraries/-/wikis/Generators/Run-a-generator) (if you're a lil dense like me that means read the stuff at the bottom not follow the guide)
 
 5. change your directory to the generators dir with
 
-    ```bash
-    cd src/generators
-    ```
+   ```bash
+   cd src/generators
+   ```
 
 6. run this line over here
 
-    ```bash
-    ./generate.py -f ~/snap/components/stuff -g SMD_2terminal_chip_molded
-    ```
+   ```bash
+   ./generate.py -f ~/snap/components/stuff -g SMD_2terminal_chip_molded
+   ```
 
-    where `-f` specifies the output path for the generated footprints (here's a warning that this line will generate a bunch of other components in that folder besides the antennas btw), and `-g` specifies the generator to be executed
+   where `-f` specifies the output path for the generated footprints (here's a warning that this line will generate a bunch of other components in that folder besides the antennas btw), and `-g` specifies the generator to be executed
 
 7. once the folder's been generated, navigate to the `RF_Antenna.pretty` folder in it and extract the 3 antennas (`Johanson_0830AT54A2200001E.kicad_mod`, `Johanson_1575AT43A0040001E.kicad_mod`, and `Johanson_2450AD18A6050002E.kicad_mod`) and absolutely NUKE all the other junk
 
@@ -393,7 +405,7 @@ note: i changed the mic to a MMICT5848-00-012 mic cos it supports I2S, also the 
 
 ## the MMICT5848-00-012:
 
-unlike the previous components, this one does NOT come with a manufacturer-provided symbol or footprint so i'll have to follow [the datasheet](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8902/MMMICT5848-00-012.pdf) and *actually* make my own... (hey, at least the docs are good)
+unlike the previous components, this one does NOT come with a manufacturer-provided symbol or footprint so i'll have to follow [the datasheet](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8902/MMMICT5848-00-012.pdf) and _actually_ make my own... (hey, at least the docs are good)
 
 ![diagram showing the recommended PCB land pattern and solder paste stencil pattern layouts](journal_images/MMICT5848-00-012_PCB_land_pattern_solder_paste_stencil_pattern.png)
 (chapter 9, PCB design and land pattern layout, figures 33 and 34)
@@ -420,7 +432,7 @@ actually i'll do this later lol
 
 just realized i paused lookout for 20 mins...
 
-## the MMICT5848-00-012 (continued): 
+## the MMICT5848-00-012 (continued):
 
 anyways, i learned the footprint requires a couple of main things:
 
@@ -428,11 +440,11 @@ anyways, i learned the footprint requires a couple of main things:
 
 the pads, in this case all except 3 were SMD, with 3 being THT for the mic's sound hole
 
-the solder paste layer is all according to the datasheet, except i couldn't figure out how to make the broken ring pads around pad 3, so i used the inner and outer diameters  and made 4 80deg arcs instead
+the solder paste layer is all according to the datasheet, except i couldn't figure out how to make the broken ring pads around pad 3, so i used the inner and outer diameters and made 4 80deg arcs instead
 
 the [courtyard](https://klc.kicad.org/footprint/f5/f5.3.html), [fab](https://klc.kicad.org/footprint/f5/f5.2.html) and [silkscreen](https://klc.kicad.org/footprint/f5/f5.1.html) layers are made according to the kicad KLC rules (to the best of my ability)
 
-## the oscillators (SC32S-7PF20PPM, ECS-80-18-23B-JTN-TR): 
+## the oscillators (SC32S-7PF20PPM, ECS-80-18-23B-JTN-TR):
 
 the oscillators also have non-part-specific symbols in the kicad library, `Crystal` and `Crystal_GND24` respectively
 
@@ -494,13 +506,13 @@ first order of business: decoupling caps
 
 ![alt text](journal_images/STM32H7B3xI_power_supply_component_layout.png)
 
-following the 
+following the
 
 **total time spent: 0.5 hours**
 
 # september 3: actually starting to do the schematics pt.2
 
-note: i'm pushing this thing early to save my streak cos im on the road and my laptop WILL die soon (dw i'll actually do this later) 
+note: i'm pushing this thing early to save my streak cos im on the road and my laptop WILL die soon (dw i'll actually do this later)
 
 please enjoy this picture of a cat at a gas station while waiting for the actual work to get done
 ![meowmoew](journal_images/gas_station_cat.png)
@@ -539,12 +551,12 @@ VDDMMC, VDDSMPS, VLXSMPS, VFBSMPS, VDD not present
 
 the STM32H7B3VIT6 supports up to 4 clocks, an internal HSE and LSE, and their external counterparts, however due to the internal oscillators' questionable accuracy (especially with tasks that can cause the MCU to heat up drastically) i'll be opting to use the external ones exclusively
 
-i'll be using a 8MHz crystal for the HSE, and a 
+i'll be using a 8MHz crystal for the HSE, and a
 32.768kHz crystal for the LSE
 
 the pinout has PH0 as OSC_IN, PH1 as OSC_OUT, PC14 as OSC32_IN (but it says OSC32_ON in the datasheet, most likely a typo), and PC15 as OSC32_OUT
 
-as for the caps, according to [this article](https://support.microchip.com/s/article/Calculating-crystal-load-capacitor), "Assuming the same value is used for C1 and C2... : C1 = C2 = 2 * (CL – Cstray)", and, "Cstray... is often approximated as 5pF."
+as for the caps, according to [this article](https://support.microchip.com/s/article/Calculating-crystal-load-capacitor), "Assuming the same value is used for C1 and C2... : C1 = C2 = 2 \* (CL – Cstray)", and, "Cstray... is often approximated as 5pF."
 
 with those values and also looking at the datasheets for both the caps ([SC32S-7PF20PPM](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7329/SC-32S.pdf), [ECS-80-18-23B-JTN-TR](https://ecsxtal.com/store/pdf/ecx_64r.pdf)), the CL for the 8MHz crystal is anywhere between 6-12.5pf, and the 32.768kHz one is from 10-20pF
 
@@ -558,7 +570,7 @@ i'll be using the `Conn_02x07_Odd_Even` symbol for this!
 
 ![alt text](journal_images/STLINK-V3MINIE_STDC14_pinout.png)
 
-according to the STLINK-V3MINIE pinout (and the MB1363 nucleo devboard schematics), 
+according to the STLINK-V3MINIE pinout (and the MB1363 nucleo devboard schematics),
 
 - pins 1, 2, and 9 are reserved
 - pin 3 is for VCC
@@ -621,13 +633,13 @@ for this i'm going to be using the LED with transistors to hook the led up to vd
 
 got carried away and attempted to use the STM32CubeMX IDE to partially configure the pins to breakout, then my laptop decided to forget to turn its backlight back on after i had it go to sleep for some reason
 
-here they are so far: 
+here they are so far:
 
 ![breakout pt.1](journal_images/STM32B3H7VIT6_breakout_1.png)
 
 anyways
 
-back to the RGB LED, well shit i didnt save now i gotta redo this 
+back to the RGB LED, well shit i didnt save now i gotta redo this
 
 ![kicad schematic showing the RGB LED for the STM32H7B3VIT6](journal_images/STM32B3H7VIT6_RGB_LED.png)
 
@@ -645,7 +657,7 @@ alright i'm back!!! (it's 10:50 rn)
 
 ![kicad schematic showing the RGB LED for the STM32H7B3VIT6 but now with values for the resistors](journal_images/STM32B3H7VIT6_RGB_LED.png)
 
-note: here i decided to split the schematic into multiple sheets, so far i have 
+note: here i decided to split the schematic into multiple sheets, so far i have
 
 1. the main sheet
 2. MCU power
@@ -676,7 +688,7 @@ my requirements for the battery module are that it holds one cell (preferably a 
 
 diagram stolen from [here](https://www.allaboutcircuits.com/technical-articles/introduction-to-battery-management-systems/)
 
-note 1: just realized i forgot to turn lapse on so i KNOW this is gonna get deflated 
+note 1: just realized i forgot to turn lapse on so i KNOW this is gonna get deflated
 
 note 2: weird commit time cos i went to sleep after forgetting to push
 
@@ -686,9 +698,9 @@ note 2: weird commit time cos i went to sleep after forgetting to push
 
 taking a break from the MCU related stuff, time to move on to comms!
 
-## communication stuff: 
+## communication stuff:
 
-all the communication stuff here's based off of the EG912UGLAC-I05-SNNSA, developer resources [here](https://developer.quectel.com/en/modules-cat/eg912u-series) 
+all the communication stuff here's based off of the EG912UGLAC-I05-SNNSA, developer resources [here](https://developer.quectel.com/en/modules-cat/eg912u-series)
 
 wait.
 
@@ -696,7 +708,7 @@ well shit apparently i can't read.
 
 ok uhhh apparently the EG912UGLAC-I05-SNNSA doesn't support GNSS or BT and the docs were actually referring to the EG912UGLAA... welp time to look for another cos even the EG912UGLAA is completely out of stock everywhere
 
-decided to axe BT and switch to the BG95-MF 
+decided to axe BT and switch to the BG95-MF
 
 so... now i have to go through extracting the footprint and symbol (i'll leave the prev EG912U-GL models here for future use)
 
@@ -707,7 +719,7 @@ as i did for the EG912UGLAC-I05-SNNSA except the .step file was provided
 
 ![screenshot of a kicad window showing the BG95 footprint](journal_images/BG95_kicad_footprint.png)
 
-note: a couple hours later i realized that kicad already has a symbol and footprint for that, ended up replacing the footprint i extracted with a copy of the kicad one and just added the manufacturer-provided 3D model to it, however i kept the extracted symbol 
+note: a couple hours later i realized that kicad already has a symbol and footprint for that, ended up replacing the footprint i extracted with a copy of the kicad one and just added the manufacturer-provided 3D model to it, however i kept the extracted symbol
 
 ![screenshot of a kicad window showing the BG95 3D model on a PCB](journal_images/BG95_kicad_3D_model.png)
 
@@ -729,7 +741,7 @@ note: i realized it was 11:57 and forgot to push, clutched in under 2 mins savin
 
 ### the micro SIM card
 
-continued configuring the MCU 
+continued configuring the MCU
 
 ![reference design schematic for the SIM](journal_images/cellular_module_SIM_schematic.png)
 
@@ -737,7 +749,7 @@ continued configuring the MCU
 
 TBC
 
-**total time spent: 2.5 hours** 
+**total time spent: 2.5 hours**
 
 # september 10: deciding on which pins to breakout and making a BOM
 
@@ -819,7 +831,7 @@ i did this to simplify figuring out which pins to breakout later and where, righ
 
 since i'm using a battery and the BG95-MF in particular i'll have to power the module at 4V even though its minimum is 3.3V (same as the MCU)
 
-now it recommends the SGM2019-ADJYN5G/TR LDO but we're going to replace it directly with the [SGM2036S-ADJXN5G/TR](https://www.sg-micro.com/rect/assets/17ec502a-e4c4-4cc4-8df9-77986a7c65af/SGM2036S.pdf?access_token=JB0xlRQ-10F_vQg1XXqsnx8zy4iF65LO) with the exact same footprint 
+now it recommends the SGM2019-ADJYN5G/TR LDO but we're going to replace it directly with the [SGM2036S-ADJXN5G/TR](https://www.sg-micro.com/rect/assets/17ec502a-e4c4-4cc4-8df9-77986a7c65af/SGM2036S.pdf?access_token=JB0xlRQ-10F_vQg1XXqsnx8zy4iF65LO) with the exact same footprint
 
 ![alt text](image-5.png)
 
@@ -881,7 +893,7 @@ TBC!!!
 
 note: back after pushing, NOT SLEEPING TONIGHT RAAAAAAWR
 
-back to that bit about the status LED, the HB-CLM3A-BKW-GKW LEDs don't exactly have a matching footprint or a standard footprint in the kicad footprint lib, so i'm using the `LED_PLCC-2_3x2mm_AK` footprint. note that this is the `AK` variant and not the `KA` variant, 
+back to that bit about the status LED, the HB-CLM3A-BKW-GKW LEDs don't exactly have a matching footprint or a standard footprint in the kicad footprint lib, so i'm using the `LED_PLCC-2_3x2mm_AK` footprint. note that this is the `AK` variant and not the `KA` variant,
 
 ![alt text](image-15.png)
 
@@ -907,7 +919,7 @@ i made a copy of the `PESD3V3L5UY` symbol and edited it to be connected to the `
 
 checking the connections took a while lol trying to make sure everything was connected to the right caps and pins
 
-now for the mcu interface bit, 
+now for the mcu interface bit,
 
 ![alt text](image-3.png)
 
@@ -929,13 +941,13 @@ i'll be using the DTC143ZEB as a drop in replacement for the DTC043E, with the `
 
 HOLY ELITE PULL
 
-i found this [website](https://blog.mbedded.ninja/pcb-design/component-packages/sot-416-component-package/) with tons of resources for embedded devices!!! (why didn't i find it earlier TwT) 
+i found this [website](https://blog.mbedded.ninja/pcb-design/component-packages/sot-416-component-package/) with tons of resources for embedded devices!!! (why didn't i find it earlier TwT)
 
 note to reader: PLEASE HAVE A LOOK AT THE WEBSITE TRUST ME ITS PEAK
 
-anyways according to it the land pattern dimensions are slightly different... and i just realized i can use the other version with gullwing leads that match the kicad footprint 
+anyways according to it the land pattern dimensions are slightly different... and i just realized i can use the other version with gullwing leads that match the kicad footprint
 
-so now i'm using the DTC143ZE3  (sung to the tune of the chorus of payphone by maroon 5)
+so now i'm using the DTC143ZE3 (sung to the tune of the chorus of payphone by maroon 5)
 
 as well as the 2SC4617TLQ with a generic npn transistor symbol which also uses an `SOT-416` footprint
 
@@ -967,7 +979,7 @@ next for the module interface design where we shove everything together:
 
 ![alt text](image-24.png)
 
-i'm going to be excluding a whole lot of pins for stuff i'm not using 
+i'm going to be excluding a whole lot of pins for stuff i'm not using
 
 so according to the reference design, there are 2 ways to power the PON_TRIG pin, depending on if your MCU outputs 3.3V directly, and i almost tried to do some really unnecessary stuff (aka. solution 1 with a weird ass transistor)
 
@@ -1010,7 +1022,7 @@ also noticed that i used the wrong component for the main antenna lol, fixed it 
 
 RESEARCH TIME RAWRRR
 
-soooooooo in the august 29 entry i said some stuff about autofocus and mv... i also feel like getting a wide FOV because well the more stuff saved the better 
+soooooooo in the august 29 entry i said some stuff about autofocus and mv... i also feel like getting a wide FOV because well the more stuff saved the better
 
 i've found a sensor that looks to be pretty useful: the IMX708 (with a 120deg fov lens) now the thing is, why is there ZERO documentation on the sensors or the camera modules (not the PCBs the literal modules the ones with the sensor and lens)
 
@@ -1053,7 +1065,7 @@ thanks to me from a couple entries ago,
 note: the following will not be about cameras AT ALL instead i will attempt to figure out how to wire everything to the MCU
 
 > the DCMI interface (unshockingly) use a whole lot of pins: (slave 8 bits external sync)
-> 
+>
 > 1. `PA4-DCMI_HSYNC`
 > 2. `PA6-DCMI_PIXCLK`
 > 3. `PA9-DCMI_D0`
@@ -1077,30 +1089,31 @@ after adding the SPI and I2C pins, i now have the additional:
 5. `PB10-12C2_SCL`
 6. `PB11-2C2_SDA`
 
-going back over the components on this board, 
+going back over the components on this board,
 there are the following,
 
 for the camera conn:
 
- - 1x DCMI (Slave 8 bits External Synchro)
- - 1x I2C (I2C)
- - 1x SPI (Full Duplex Master)
+- 1x DCMI (Slave 8 bits External Synchro)
+- 1x I2C (I2C)
+- 1x SPI (Full Duplex Master)
 
 for the RF module:
 
- - 2x UART (Asynchronous, CTS/RTS) and (Asynchronous)
- - 8x GPIO
+- 2x UART (Asynchronous, CTS/RTS) and (Asynchronous)
+- 8x GPIO
 
 for the mic:
 
- - 1x I2S (Half Duplex Master)
+- 1x I2S (Half Duplex Master)
 
 for the RGB status LED:
- - 3x GPIO
+
+- 3x GPIO
 
 for the external flash memory:
 
- - 1x OCTOSPI (Quad SPI)
+- 1x OCTOSPI (Quad SPI)
 
 for the clocks:
 
@@ -1109,8 +1122,8 @@ for the clocks:
 
 for the debugger conn:
 
- - 1x Debug (JTAG 5 pins)
- - 1x UART (Asynchronous)
+- 1x Debug (JTAG 5 pins)
+- 1x UART (Asynchronous)
 
 TBC
 
@@ -1133,3 +1146,29 @@ i'm not done with the LDO for it yet because i just realized i should work out a
 TBC
 
 **total time spent: 2.1 hours**
+
+# september 16: time to lock in for the schematic (continued pt.3)
+
+since apparently i _should_ be able to reship projects, i'm gonna leave off the batery management module for now and have it be run directly off of the USB-C connector
+
+![alt text](image-36.png)
+
+i'm going to be using the USB4135-GF-A just for a basic power supply, i won't be needing a USB to UART chip to program this
+
+![alt text](image-37.png)
+
+here's the main power supply and indicator LED
+
+note: paused lapse for 30 mins :<
+
+here's the SD card connector, connected with a 4 bit wide bus
+
+![alt text](image-38.png)
+
+changed the OCTOSPI pins to have a CLK and CS
+
+![alt text](image-39.png)
+
+TBC
+
+**total time spent: 2.75 hours**
