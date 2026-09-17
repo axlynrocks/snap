@@ -1193,4 +1193,4 @@ and finally, wiring everything together:
 
 now all that's left for the schematic is to organize it and make it readable enough to get a review online
 
-**total time spent: o.5 hours**
+**total time spent: 0.5 hours**
