@@ -644,17 +644,26 @@
     "top_level_sheets": [
       {
         "filename": "snap.kicad_sch",
-        "name": "snap",
+        "name": "MCU",
         "uuid": "30fc28b6-2d62-4a7d-b2af-6de294b3b238"
+      },
+      {
+        "filename": "rf.kicad_sch",
+        "name": "RF",
+        "uuid": "3833a77f-a8ab-4ade-b555-e019dff43590"
       }
     ],
-    "used_designators": "R44,R46-49,J5,#PWR114-117,C67-69,U8-9",
+    "used_designators": "J2,J6,R1-11,R23-39,R50,D4-8,L1,AE1-2,#PWR1-3,#PWR5,#PWR9,#PWR16-17,#PWR24-31,#PWR47-96,#PWR118-126,C14-20,C28-56,C70-73,FB1,MK1,Q1-6,Q10-13,U1-2,U4-6",
     "variants": []
   },
   "sheets": [
     [
       "30fc28b6-2d62-4a7d-b2af-6de294b3b238",
-      "snap"
+      "MCU"
+    ],
+    [
+      "3833a77f-a8ab-4ade-b555-e019dff43590",
+      "RF"
     ]
   ],
   "text_variables": {},

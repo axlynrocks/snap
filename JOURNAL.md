@@ -1172,3 +1172,25 @@ changed the OCTOSPI pins to have a CLK and CS
 TBC
 
 **total time spent: 2.75 hours**
+
+# september 17 : time to lock in for the schematic (continued pt.3)
+
+![alt text](image-40.png)
+
+and this is the quad SPI NOR flash, adapted from the openmv H7
+
+![alt text](image-41.png)
+
+added the extra DCMI pins
+
+![alt text](image-42.png)
+
+the mic, but the actual component is unpopulated cos it connects off board via an FPC connector
+
+and finally, wiring everything together:
+
+![alt text](image-43.png)
+
+now all that's left for the schematic is to organize it and make it readable enough to get a review online
+
+**total time spent: o.5 hours**
